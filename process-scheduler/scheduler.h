@@ -9,6 +9,7 @@ typedef struct{
 
 typedef struct{
 	void* head;
+	void* tail;
 	int total;
 	int timeSlice;
 } Scheduler;
@@ -16,3 +17,4 @@ typedef struct{
 Process* newProcess(String name,int time,int priority);
 Scheduler* createScheduler(int timeSlice);
 int insertProcess(Scheduler* scheduler,Process* process);
+void execute(Scheduler* scheduler,int availableTime);
