@@ -13,4 +13,5 @@ typedef struct{
 
 doubleList* create();
 Node* createNode(void* previous,void* next);
-bool insert(doubleList* dList,int index,void * element);
+bool insert(doubleList* dList,int index,void* element);
+bool remove(doubleList* dList,int index);

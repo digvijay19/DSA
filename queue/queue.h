@@ -1,5 +1,7 @@
 #include <stdbool.h>
 
+typedef char String[256];
+
 typedef struct {
 	void* base;
 	int length;

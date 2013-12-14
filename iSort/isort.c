@@ -1,6 +1,7 @@
 #include "isort.h"
 #include <stdlib.h>
 #include <memory.h>
+
 void isort(void* base, int numberOfElements, int elementSize,compare comp){
 	void* temp = calloc(1,elementSize);
 	int i,j;
@@ -13,4 +14,5 @@ void isort(void* base, int numberOfElements, int elementSize,compare comp){
 		}
 		memcpy(base+(j+1)*elementSize,temp,elementSize);
 	}
+	free(temp);
 }

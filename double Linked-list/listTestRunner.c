@@ -64,9 +64,19 @@ int main(){
 		test_insert_element_to_empty_list();
 	tearDown();
 	testEnded();
-	testStarted("test_insert_element_to_a_list_when_one_element_present");
+	testStarted("test_insert_three_elements_and_check_the_next_of_each");
 	setup();
-		test_insert_element_to_a_list_when_one_element_present();
+		test_insert_three_elements_and_check_the_next_of_each();
+	tearDown();
+	testEnded();
+	testStarted("test_insert_elements_and_check_data_of_each");
+	setup();
+		test_insert_elements_and_check_data_of_each();
+	tearDown();
+	testEnded();
+	testStarted("test_insert_elements_of_different_data_types");
+	setup();
+		test_insert_elements_of_different_data_types();
 	tearDown();
 	testEnded();
 	testStarted("test_insert_element_gives_true_when_inerted");
@@ -79,9 +89,9 @@ int main(){
 		test_insert_element_gives_false_when_not_succesfull();
 	tearDown();
 	testEnded();
-	testStarted("test_insert_elements_of_different_data_types");
+	testStarted("test_delete_2nd_element");
 	setup();
-		test_insert_elements_of_different_data_types();
+		test_delete_2nd_element();
 	tearDown();
 	testEnded();
 

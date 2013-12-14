@@ -21,42 +21,73 @@ void test_insert_element_to_empty_list(){
     insert(dlist, 0, &_5);
     ASSERT(dlist->length == 1);
     ASSERT(*(int*)dlist->head->data == 5);
+    ASSERT(dlist->head->previous == NULL);
+    ASSERT(dlist->head->next == NULL);
 }
-void test_insert_element_to_a_list_when_one_element_present(){
+void test_insert_three_elements_and_check_the_next_of_each(){
     doubleList* dlist = create();
+    Node *one,*two,*three;
     int _5 = 5;
-    int _2 = 2;
     insert(dlist, 0, &_5);
+    insert(dlist, 1, &_5);
+    insert(dlist, 2, &_5);
+    one = dlist->head;
+    two = one->next;
+    three = two->next;
+    ASSERT(dlist->length == 3);
+    ASSERT(one->next == two);
+    ASSERT(two->next == three);
+    ASSERT(three->next == NULL);
+}
+void test_insert_elements_and_check_data_of_each(){
+    doubleList* dlist = create();
+    Node *one,*two,*three;
+    int _1 = 1;
+    int _2 = 2;
+    int _3 = 3;
+    insert(dlist, 0, &_1);
     insert(dlist, 1, &_2);
-    ASSERT(dlist->length == 2);
-    ASSERT(*(int*)dlist->head->data == 5);
-}
-void test_insert_element_gives_true_when_inerted(){
-	doubleList* dlist = create();
-	int _5 = 5;
-    ASSERT(insert(dlist, 0, &_5) == true);
-}
-void test_insert_element_gives_false_when_not_succesfull(){
-	doubleList* dlist = create();
-	int _5 = 5;
-    ASSERT(insert(dlist, 1, &_5) == false);
+    insert(dlist, 2, &_3);
+    one = dlist->head;
+    two = one->next;
+    three = two->next;
+    ASSERT(dlist->length == 3);
+    ASSERT(*(int*)one->data == 1);
+    ASSERT(*(int*)two->data == 2);
+    ASSERT(*(int*)three->data == 3);
 }
 void test_insert_elements_of_different_data_types(){
     doubleList* dlist = create();
     Node *one,*two;
-	int _4 = 4;
-	float _num = 4.2;
-    
-    insert(dlist, 0, &_4);
-    insert(dlist, 1, &_num);
+    int _1 = 1;
+    char _a = 'a';
+    insert(dlist, 0, &_1);
+    insert(dlist, 1, &_a);
     one = dlist->head;
     two = one->next;
-    ASSERT(*(int*)one->data == 4);
-    ASSERT(*(float*)two->data == 4.2f);
+    ASSERT(*(int*)one->data == 1);
+    ASSERT(*(char*)two->data == 'a');
 }
-// void test_insert_elements_and_set_next_and_previous_adreses(){
-//     doubleList* dlist = create();
-//     Node *one,*two;
-// 	int _1 = 1;
-// 	int _2 = 2;
-// }
+void test_insert_element_gives_true_when_inerted(){
+    doubleList* dlist = create();
+    int _5 = 5;
+    ASSERT(insert(dlist, 0, &_5) == true);
+}
+void test_insert_element_gives_false_when_not_succesfull(){
+    doubleList* dlist = create();
+    int _5 = 5;
+    ASSERT(insert(dlist, 1, &_5) == false);
+}
+void test_delete_2nd_element(){
+    doubleList* dlist = create();
+    int _1 = 1,_2 = 2,_3 = 3;
+    Node *one,*two;
+    insert(dlist, 0, &_1);
+    insert(dlist, 1, &_2);
+    insert(dlist, 2, &_3);
+    ASSERT(remove(dlist, 1));
+    ASSERT(2 == dlist->length);
+    one = dlist->head;
+    two= one->next;
+    ASSERT(3 == *(int*)two->data);
+}

@@ -27,21 +27,18 @@ Queue* create(int size,int length){
 }
 bool enqueue(Queue *queue,void* element){
 	if(isFull(queue)) return false;
-	memcpy(queue->base+(queue->rear*queue->typeSize),element,queue->typeSize);
-	queue->rear++;
-	printf("enqueue\n");
-	printf("--->Front  = %d\n",queue->front);
-	printf("--->Rear  = %d\n",queue->rear);
+	if(queue->rear == -1) queue->rear = 0;
+	else
+		queue->rear++;
+	memcpy(queue->base+((queue->rear-1)*queue->typeSize),element,queue->typeSize);
 	return true;
 }
 void* dequeue(Queue *queue){
 	void * element;
-	if(queue->front == queue->length) queue->front = 0;
+	if(queue->front == queue->length-1) queue->front = 0;
 	if(isEmpty(queue)) return NULL;
 	element = queue->base+(queue->front*queue->typeSize);
 	queue->front++;
-	printf("dequeue\n");
-	printf("--->Front  = %d\n",queue->front);
-	printf("--->Rear  = %d\n",queue->rear);
+	
 	return element;
 }

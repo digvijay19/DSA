@@ -39,12 +39,15 @@ void execute(Scheduler* scheduler,int availableTime){
 	Process* process = scheduler->head;
 	int i,temp=0;
 	for(i=1;i<=availableTime;i++){
-		if(process->nextProcess != NULL && temp == 10){
-			process =process->nextProcess;
-			temp = 0;
-		}
 		if(process->time > 0)
 			process->time--;
 		temp = temp+1;
+		if(temp == 10){
+			if(process->nextProcess == NULL)
+				process = scheduler->head;
+			else
+				process =process->nextProcess;
+			temp = 0;
+		}
 	}
 }

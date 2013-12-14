@@ -54,34 +54,32 @@ void test_enqueue_integer_queue_in_circular_way(){
 	int _1 = 1;
 	int _2 = 2;
 	int result;
-	int two_ints[] = {2,1};
-	Queue b = {two_ints,2,sizeof(int),1,1};
 	integerQueue = create(sizeof(4),2);
 	enqueue(integerQueue,&_1);
 	enqueue(integerQueue,&_1);
 	result = *(int*)dequeue(integerQueue);
 	enqueue(integerQueue,&_2);
-	ASSERT(areEqual(*integerQueue,b));
+	// printf("=======>front = %d\n",integerQueue->front);
+	// printf("=======>rear = %d\n",integerQueue->rear);
+	ASSERT(result == 1);
+	ASSERT(integerQueue->front == 1);
+	ASSERT(integerQueue->rear == 0);
 }
 void test_dequeue_integer_queue_in_circular_way(){
 	int _1 = 1;
 	int _2 = 2;
 	int result,i;
-	int expected[] = {2,2,1,1};
-	int four_ints[] = {1,1,1,1};
-	Queue b = {expected,4,sizeof(int),1,2};
-	Queue a = {four_ints,4,sizeof(int),0,4};
+	int four_ints[] = {0,0,0,0};
+	Queue a = {four_ints,4,sizeof(int),0,0};
+	enqueue(&a,&_1);
+	enqueue(&a,&_1);
+	enqueue(&a,&_1);
+	enqueue(&a,&_1);
 	dequeue(&a);
 	dequeue(&a);
 	dequeue(&a);
 	dequeue(&a);
 	enqueue(&a,&_2);
-	enqueue(&a,&_2);
-	dequeue(&a);
-	for(i=0;i<4;i++){
-		printf("=======>%d\n",*(int*)(a.base+(i*4)));
-	}
-	printf("=======>front = %d\n",a.front);
-	printf("=======>rear = %d\n",a.rear);
-	ASSERT(areEqual(a,b));
+	ASSERT(a.front == 1);
+	ASSERT(a.rear == 0);
 }

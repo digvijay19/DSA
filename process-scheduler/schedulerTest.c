@@ -93,3 +93,14 @@ void test_execute__two_process_in_scheduler_when_process_is_greater_than_timesli
 	ASSERT(two.time == 0);
 	free(scheduler);
 }
+void test_execute_processes_in_circular_manner(){
+	Process one = {"one",20,1,NULL};
+	Process two = {"two",10,1,NULL};
+	Scheduler *scheduler = createScheduler(10);
+	insertProcess(scheduler,&one);
+	insertProcess(scheduler,&two);
+	execute(scheduler,30);
+	ASSERT(one.time == 0);
+	ASSERT(two.time == 0);
+	free(scheduler);
+}
