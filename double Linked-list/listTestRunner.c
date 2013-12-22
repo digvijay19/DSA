@@ -94,6 +94,21 @@ int main(){
 		test_delete_2nd_element();
 	tearDown();
 	testEnded();
+	testStarted("test_delete_when_index_not_present");
+	setup();
+		test_delete_when_index_not_present();
+	tearDown();
+	testEnded();
+	testStarted("test_delete_when_list_is_empty");
+	setup();
+		test_delete_when_list_is_empty();
+	tearDown();
+	testEnded();
+	testStarted("test_delete_when_index_passed_is_negative");
+	setup();
+		test_delete_when_index_passed_is_negative();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

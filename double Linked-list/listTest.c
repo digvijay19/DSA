@@ -91,3 +91,29 @@ void test_delete_2nd_element(){
     two= one->next;
     ASSERT(3 == *(int*)two->data);
 }
+void test_delete_when_index_not_present(){
+    doubleList* dlist = create();
+    int _1 = 1,_2 = 2,_3 = 3;
+    Node *one,*two;
+    insert(dlist, 0, &_1);
+    insert(dlist, 1, &_2);
+    insert(dlist, 2, &_3);
+    ASSERT(remove(dlist, 4) == false);
+    ASSERT(3 == dlist->length);
+}
+void test_delete_when_list_is_empty(){
+    doubleList* dlist = create();
+    Node *one,*two;
+    ASSERT(remove(dlist, 0) == false);
+    ASSERT(0 == dlist->length);
+}
+void test_delete_when_index_passed_is_negative(){
+    doubleList* dlist = create();
+    int _1 = 1,_2 = 2,_3 = 3;
+    Node *one,*two;
+    insert(dlist, 0, &_1);
+    insert(dlist, 1, &_2);
+    insert(dlist, 2, &_3);
+    ASSERT(remove(dlist,-1) == false);
+    ASSERT(3 == dlist->length);
+}

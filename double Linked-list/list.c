@@ -40,13 +40,18 @@ bool insert(doubleList* dList,int index,void* element){
 	return true;
 }
 bool remove(doubleList* dList,int index){
-	int i = 1;
-	Node *previousNode;
-	Node *nextNode = NULL;
-	if(index >= dList->length) return false;
-	while(i < dList->length){
-		
-		i++;
+	int i;
+	Node *previousNode,*nextNode;
+	Node *temp = dList->head;
+	if(index >= dList->length || index < 0) return false;
+	for(i=0;i<index;i++){
+		temp = temp->next;
 	}
+	previousNode = temp->previous;
+	nextNode = temp->next;
+	free(temp);
+	if(previousNode != NULL)	previousNode->next = nextNode;
+	if(nextNode != NULL)	nextNode->previous = previousNode;
+	dList->length--;
 	return true;
 }
