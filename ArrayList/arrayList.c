@@ -82,6 +82,15 @@ void* get(ArrayList *list, int index) {
 	return list->base[index];
 }
 
+int search(ArrayList *list,void* data,compareFunc *comp){
+	int i=0;
+	for(i=0;i<list->length;i++){
+		if(comp(list->base[i],data) == 0)
+			return i+1;
+	}
+	return 0;
+}
+
 void dispose(ArrayList *list) {
 	free(list->base);
 }

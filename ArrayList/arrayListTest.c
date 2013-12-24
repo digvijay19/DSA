@@ -145,3 +145,29 @@ void test_remove_element_when_index_is_negative(){
 	result = remove(internsPtr, -1);
 	ASSERT(result == NULL);
 }
+int compareInt(void *one,void* two){
+	return (*(int*)one - *(int*)two);
+}
+void test_search_integer_from_list(){
+	int result;
+	ArrayList list = create(2);
+	ArrayList *listPtr = &list;
+	int _10 = 10;
+	int _20 = 20;
+	add(listPtr, &_10);
+	add(listPtr, &_20);
+	result = search(listPtr,&_20, &compareInt);
+	ASSERT(result == 2);
+}
+void test_search_when_element_not_present(){
+	int result;
+	ArrayList list = create(2);
+	ArrayList *listPtr = &list;
+	int _10 = 10;
+	int _20 = 20;
+	int toSeach = 30;
+	add(listPtr, &_10);
+	add(listPtr, &_20);
+	result = search(listPtr,&toSeach, &compareInt);
+	ASSERT(result == 0);
+}

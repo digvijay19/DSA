@@ -124,6 +124,16 @@ int main(){
 		test_remove_element_when_index_is_negative();
 	tearDown();
 	testEnded();
+	testStarted("test_search_integer_from_list");
+	setup();
+		test_search_integer_from_list();
+	tearDown();
+	testEnded();
+	testStarted("test_search_when_element_not_present");
+	setup();
+		test_search_when_element_not_present();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
