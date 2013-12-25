@@ -14,9 +14,10 @@ sList* createList(){
 	return list;
 }
 
-int insert(sList* list,Node* node,int position){
+int insert(sList* list,void* element,int position){
 	int i;
-	Node *tempNode,*previousNode,*nextNode;
+	Node *tempNode,*previousNode,*nextNode,*node;
+	node = createNode(element);
     if(list == NULL) return 0;
 	if(position < 0 || position > list->length) return 0;
 
