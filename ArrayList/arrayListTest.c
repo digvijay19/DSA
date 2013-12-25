@@ -157,7 +157,7 @@ void test_search_integer_from_list(){
 	add(listPtr, &_10);
 	add(listPtr, &_20);
 	result = search(listPtr,&_20, &compareInt);
-	ASSERT(result == 2);
+	ASSERT(result == 1);
 }
 void test_search_when_element_not_present(){
 	int result;
@@ -169,5 +169,5 @@ void test_search_when_element_not_present(){
 	add(listPtr, &_10);
 	add(listPtr, &_20);
 	result = search(listPtr,&toSeach, &compareInt);
-	ASSERT(result == 0);
+	ASSERT(result == -1);
 }

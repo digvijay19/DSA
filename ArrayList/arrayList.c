@@ -34,6 +34,29 @@ void increaseCapacity(ArrayList *list) {
 
 // -------------------------------------------------------------------------------
 
+int hasNextArrayElement(Iterator *it){
+	ArrayList *list = it->list;
+	if(it->position >= list->length)
+		return 0;
+	return 1;
+}
+void* nextArrayElement(Iterator *it){
+	ArrayList *list = it->list;
+	if(hasNextArrayElement(it))
+		return list->base[it->position++];
+	return NULL;
+}
+Iterator getIterator(ArrayList *list){
+	Iterator it;
+	it.list = list;
+	it.position = 0;
+	it.hasNext = &hasNextArrayElement;
+	it.next = &nextArrayElement;
+	return it;
+}
+
+// -------------------------------------------------------------------------------
+
 ArrayList create(int capacity) {
 	ArrayList list;
 	list.base = (void*)malloc(sizeof(void*) * capacity);
@@ -83,12 +106,12 @@ void* get(ArrayList *list, int index) {
 }
 
 int search(ArrayList *list,void* data,compareFunc *comp){
-	int i=0;
-	for(i=0;i<list->length;i++){
-		if(comp(list->base[i],data) == 0)
-			return i+1;
+	Iterator it = getIterator(list);
+	while(it.hasNext(&it)){
+		if(comp(it.next(&it),data) == 0)
+			return it.position-1;
 	}
-	return 0;
+	return -1;
 }
 
 void dispose(ArrayList *list) {

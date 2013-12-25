@@ -1,3 +1,5 @@
+#include "../iterator.h"
+
 typedef struct {
 	void** base;
 	int capacity;
