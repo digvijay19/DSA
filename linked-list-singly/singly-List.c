@@ -17,6 +17,9 @@ sList* createList(){
 int insert(sList* list,Node* node,int position){
 	int i;
 	Node *tempNode,*previousNode,*nextNode;
+    if(list == NULL) return 0;
+	if(position < 0 || position > list->length) return 0;
+
 	if(list->head == NULL){
 		list->head = node;
 		list->length++;
@@ -24,11 +27,9 @@ int insert(sList* list,Node* node,int position){
 	}
 	previousNode = list->head;
 	nextNode = previousNode->next;
-	for(i=0;i<position;i++){
-		if(nextNode != NULL){
-			previousNode = nextNode;
-			nextNode = nextNode->next;
-		}
+	for(i=0;i<position-1;i++){
+		previousNode = nextNode;
+		nextNode = nextNode->next;
 	}
 	previousNode->next = node;
 	node->next = nextNode;
@@ -38,28 +39,28 @@ int insert(sList* list,Node* node,int position){
 
 int remove(sList* list,int position){
     int i;
-    Node *head,*deletedNode,*tempNode,*nextNode;
-    if(position <= -1 || position >= list->length)
-        return 0;
-    head = list->head;
-    for(i = 0 ; i < position ; i++)
-        head = head->next;
-    if(i == 0){
-    	tempNode = list->head;
-        tempNode = tempNode->next;
+    Node *prevoiusNode,*toDelete;
+    if(list == NULL) return 0;
+    if(position < 0 || position >= list->length) return 0;
+    
+    prevoiusNode = list->head;
+    
+    for(i=0;i<position-1;i++){
+    	prevoiusNode = prevoiusNode->next;
+    }
+    if(i==0){
+    	list->head = prevoiusNode->next;
+    	free(prevoiusNode);
     	list->length--;
-		free(head);
-        return 1;
+    	return 1;
     }
-    if(i == list->length - 1){
-    	tempNode = list->head;   
-        tempNode->next = NULL;
-        list->length--;
-        return 1;
-    }
-    tempNode = list->head;
-    nextNode = tempNode->next;
-    tempNode->element = nextNode->element;
+    
+    if(toDelete->next != NULL)
+    	prevoiusNode->next = toDelete->next;
+    else
+    	prevoiusNode->next = NULL;
+    
+    free(toDelete);
     list->length--;
     return 1;
 };

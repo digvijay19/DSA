@@ -24,8 +24,10 @@ Stack* create(int length){
 }
 
 int push(Stack *stack,void *element){
-	if(isFull(stack))
+	if(isFull(stack)){
+		realloc(stack->array, stack->length*sizeof(void*));
 		stack->length += stack->length;
+	}
 	stack->top++;
 	*(getElement(stack)) = element;
 	return 1;

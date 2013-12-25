@@ -21,7 +21,8 @@ Stack* create(int sizeOfElement,int maxElements){
 int push(Stack *stack,void *element){
 	void* newElement;
 	if(isFull(stack)){
-		stack->maxElements += stack->maxElements; 
+		stack->maxElements += stack->maxElements;
+		realloc(stack->array,stack->maxElements*stack->sizeOfElement);
 	}
 	newElement = getNextElement(stack);
 	memcpy (newElement, element, stack->sizeOfElement);

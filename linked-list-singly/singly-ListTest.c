@@ -29,3 +29,35 @@ void test_insert_two_nodes_and_remove_them(){
 	ASSERT(1 == remove(list, 0));	
 	ASSERT(list->length == 0);
 }
+void test_insert_when_list_is_NULL(){
+	int element = 10;
+	Node* nodeOne = createNode(&element);
+	ASSERT(0 == insert(NULL, nodeOne, 0));
+}
+void test_insert_at_negative_position(){
+	int element = 10;
+	Node* nodeOne = createNode(&element);
+	ASSERT(0 == insert(list, nodeOne, -1));
+}
+void test_insert_when_position_not_present(){
+	int element = 10;
+	Node* nodeOne = createNode(&element);
+	ASSERT(0 == insert(list, nodeOne, 1));
+}
+void test_remove_when_list_is_empty(){
+	ASSERT(0 == remove(list, 0));	
+	ASSERT(list->length == 0);
+}
+void test_remove_when_list_is_NULL(){
+	ASSERT(0 == remove(NULL, 1));	
+}
+void test_remove_psition_is_negative(){
+	ASSERT(0 == remove(list, -1));	
+}
+void test_remove_psition_is_not_present(){
+	int element = 10;
+	Node* nodeOne = createNode(&element);
+	ASSERT(1 == insert(list, nodeOne, 0));
+	ASSERT(1 == insert(list, nodeOne, 0));
+	ASSERT(0 == remove(list, 2));	
+}
