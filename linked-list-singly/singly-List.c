@@ -1,5 +1,6 @@
 #include "singly-List.h"
 #include <stdlib.h>
+
 Node* createNode(void* element){
 	Node* node = calloc(1,sizeof(Node));
 	node->element = element;
@@ -65,3 +66,32 @@ int remove(sList* list,int position){
     list->length--;
     return 1;
 };
+
+int isNextNodePresent(Iterator *it){
+	sList list;
+	if(NULL == it->list) return 0;
+	list = *(sList*)it->list;
+	if(it->position == list.length) return 0;
+	return 1;
+}
+
+void* nextNodeInList(Iterator *it){
+	int i;
+	Node* currentNode;
+	if(isNextNodePresent(it) == 0) return NULL;
+	currentNode = ((sList*)(it->list))->head;
+	for(i = 0; i<it->position; i++){
+		currentNode = currentNode->next;
+	};
+	it->position++;
+	return currentNode->element;
+}
+
+Iterator getIterator(sList *list){
+	Iterator it;
+	it.list = list;
+	it.position = 0;
+	it.hasNext = &isNextNodePresent;
+	it.next = &nextNodeInList;
+	return it;
+}
