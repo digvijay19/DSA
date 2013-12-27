@@ -45,12 +45,12 @@ void *nextSibling(Iterator *it){
 
 Iterator getChildren(Tree *tree, void *parentData){
 	Iterator it;
-	TreeNode *tempNode,*rootNode = tree->root;
+	TreeNode *parentNode,*rootNode = tree->root;
 	if(tree->comp(rootNode->data,parentData)==0)
-		tempNode = rootNode;
+		parentNode = rootNode;
 	else
-		tempNode = getTreeNodeByData(rootNode->child, parentData,tree->comp);
-	it = getIterator(tempNode->child);
+		parentNode = getTreeNodeByData(rootNode->child, parentData,tree->comp);
+	it = getIterator(parentNode->child);
 	it.next = &nextSibling;
 	return it;
 }
@@ -65,7 +65,7 @@ int insertInTree(Tree* tree, void *parentData, void *dataToInsert){
 	}
 	
 	rootNode = (TreeNode*)tree->root;
-	// if(search(tree,dataToInsert) == 0)	return 0;
+	// if(search(tree,dataToInsert))	return 0;
 
 	if(0 == tree->comp(rootNode->data,parentData)){
 		newNode = createTreeNode(rootNode, dataToInsert);
@@ -117,7 +117,7 @@ void disposeNodes(sList *list){
 		childList = (sList*)(treeNode->child);
 		disposeNodes(childList);
 	}
-	free(list);
+	disposeList(list);
 }
 void disposeTree(Tree* tree){
 	TreeNode *root = tree->root;

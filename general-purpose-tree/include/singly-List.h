@@ -15,3 +15,4 @@ sList* createList();
 int insert(sList* list,void* element,int position);
 int remove(sList* list,int position);
 Iterator getIterator(sList *list);
+void disposeList(sList *list);
