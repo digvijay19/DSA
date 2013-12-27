@@ -56,11 +56,15 @@ Iterator getChildren(Tree *tree, void *parentData){
 
 int insertInTree(Tree* tree, void *parentData, void *dataToInsert){
 	TreeNode *parentNode, *newNode,*rootNode;
+	if(tree == NULL || dataToInsert == NULL) return 0;
+	
 	if(NULL == parentData){
 		tree->root = createTreeNode(NULL, dataToInsert);
 		return 1;
 	}
+	
 	rootNode = (TreeNode*)tree->root;
+	// if(search(tree,dataToInsert) == 0)	return 0;
 
 	if(0 == tree->comp(rootNode->data,parentData)){
 		newNode = createTreeNode(rootNode, dataToInsert);
@@ -70,3 +74,35 @@ int insertInTree(Tree* tree, void *parentData, void *dataToInsert){
 	newNode = createTreeNode(parentNode, dataToInsert);
 	return insert(parentNode->child, newNode,parentNode->child->length);
 };
+
+int search(Tree *tree,void* elementToSearch){
+	TreeNode *rootNode;
+	if(tree == NULL || elementToSearch == NULL)
+		return 0;
+	rootNode = tree->root;
+	if(tree->comp(elementToSearch,rootNode->data) == 0)
+		return 1;
+	if(getTreeNodeByData(rootNode->child, elementToSearch,tree->comp) != NULL)
+		return 1;
+	return 0;
+}
+
+int deleteFromTree(Tree *tree,void* dataToRemove){
+	TreeNode *rootNode,*nodeToDelete,*parentNode;
+	Iterator it;
+	if(tree == NULL || dataToRemove == NULL) return 0;
+	rootNode = tree->root;
+	nodeToDelete = getTreeNodeByData(rootNode->child, dataToRemove, tree->comp);
+	if(nodeToDelete == NULL || nodeToDelete->child->length != 0)	return 0;
+	
+	parentNode = nodeToDelete->parent;
+	it = getIterator(parentNode->child);
+	
+	while(it.hasNext(&it)){
+		if(tree->comp(it.next(&it),nodeToDelete) == 0){
+			remove(parentNode->child,it.position);
+			break;
+		}
+	}
+	return 1;
+}
