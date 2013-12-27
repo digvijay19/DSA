@@ -8,3 +8,5 @@ typedef struct TreeNode{
 } TreeNode;
 
 TreeNode* createTreeNode(TreeNode* tree,void* parent);
+
+void *nextSibling(Iterator *it);

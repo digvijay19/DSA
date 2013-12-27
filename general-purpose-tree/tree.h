@@ -18,3 +18,5 @@ Iterator getChildren(Tree *tree, void *parentData);
 int search(Tree *tree,void* elementToSearch);
 
 int deleteFromTree(Tree *tree,void* dataToRemove);
+
+void disposeTree(Tree* tree);

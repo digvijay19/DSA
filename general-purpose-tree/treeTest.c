@@ -6,20 +6,25 @@
 
 const int SUCCESS = 1;
 const int FAIL = 0;
-
+Tree tree;
 
 int compareIntegers(void *a,void *b){
     return *(int*)a - *(int*)b;
 }
 
+void setup(){
+    tree = create(compareIntegers);
+}
+void tearDown(){
+    disposeTree(&tree);
+}
+
 void test_insert_root_node(){
-    Tree tree = create(compareIntegers);
     int data = 10;
     ASSERT(SUCCESS == insertInTree(&tree, NULL, &data));
     ASSERT(&data == getRootData(&tree));
 }
 void test_insert_node_under_root_node(){
-    Tree tree = create(compareIntegers);
     int numbers[] = {1,2,3};
     Iterator children;
     insertInTree(&tree, NULL, &numbers[0]);
@@ -30,7 +35,6 @@ void test_insert_node_under_root_node(){
     ASSERT(*(int*)children.next(&children) == 3);
 }
 void test_insert_node_under_child_node(){
-    Tree tree = create(compareIntegers);
     int root = 1;
     int levelOneChild = 2;
     int levelTwoChild = 3;
@@ -42,7 +46,6 @@ void test_insert_node_under_child_node(){
     ASSERT(*(int*)childrenOflevelOne.next(&childrenOflevelOne) == 3);
 }
 void test_insert_node_under_second_child_node(){
-    Tree tree = create(compareIntegers);
     int root = 1;
     int levelOneChildren[] = {2,3};
     int levelTwoChildren[] = {4,5};
@@ -61,7 +64,6 @@ void test_insert_when_tree_is_NULL(){
     ASSERT(0 == insertInTree(NULL, NULL, &root));
 }
 void test_insert_when_data_to_insert_is_NULL(){
-    Tree tree = create(compareIntegers);
     ASSERT(0 == insertInTree(&tree, NULL, NULL));
 }
 // void test_do_not_insert_when_data_is_already_present(){
@@ -74,7 +76,6 @@ void test_insert_when_data_to_insert_is_NULL(){
 //     ASSERT( 0 == insertInTree(&tree, &root, &children[1]));
 // }
 void test_search_rootNode_in_tree(){
-    Tree tree = create(compareIntegers);
     int root = 10;
     insertInTree(&tree, NULL, &root);
     ASSERT(1 == search(&tree,&root));
@@ -88,7 +89,6 @@ void test_search_child_node_in_tree(){
     ASSERT(1 == search(&tree,&child));   
 }
 void test_search_when_element_is_not_present(){
-    Tree tree = create(compareIntegers);
     int root = 1;
     int elementToSearch = 3;
     insertInTree(&tree, NULL, &root);
@@ -99,11 +99,9 @@ void test_search_when_tree_is_NULL(){
     ASSERT(0 == search(NULL,&elementToSearch));
 }
 void test_search_when_element_to_search_is_NULL(){
-    Tree tree = create(compareIntegers);
     ASSERT(0 == search(&tree,NULL));
 }
 void test_remove_Node_from_tree(){
-    Tree tree = create(compareIntegers);
     int root = 1;
     int child = 2;
     Iterator children;
@@ -112,7 +110,6 @@ void test_remove_Node_from_tree(){
     ASSERT(SUCCESS == deleteFromTree(&tree, &child));
 }
 void test_remove_when_not_present(){
-    Tree tree = create(compareIntegers);
     int root = 1;
     int child = 2;
     Iterator children;
@@ -120,7 +117,6 @@ void test_remove_when_not_present(){
     ASSERT(FAIL == deleteFromTree(&tree, &child));
 }
 void test_do_not_remove_when_children_are_present(){
-    Tree tree = create(compareIntegers);
     int root = 1;
     int levelOneChild = 2;
     int levelTwoChild = 3;
@@ -135,6 +131,5 @@ void test_remove_when_tree_is_NULL(){
     ASSERT(FAIL == deleteFromTree(NULL, &toRemove));
 }
 void test_remove_when_data_is_NULL(){
-    Tree tree = create(compareIntegers);
     ASSERT(FAIL == deleteFromTree(&tree, NULL));
 }

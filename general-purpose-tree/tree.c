@@ -33,6 +33,7 @@ void* getRootData(Tree *tree){
 	TreeNode tempTree = *(TreeNode*)tree->root;
 	return tempTree.data; 
 }
+
 void *nextSibling(Iterator *it){
 	TreeNode *node;
 	Iterator treeIterator = getIterator(it->list);
@@ -105,4 +106,23 @@ int deleteFromTree(Tree *tree,void* dataToRemove){
 		}
 	}
 	return 1;
+}
+void disposeNodes(sList *list){
+	Iterator it ;
+	sList* childList;
+	TreeNode *treeNode;
+	it = getIterator(list);
+	while(it.hasNext(&it)){
+		treeNode = (TreeNode*)it.next(&it);
+		childList = (sList*)(treeNode->child);
+		disposeNodes(childList);
+	}
+	free(list);
+}
+void disposeTree(Tree* tree){
+	TreeNode *root = tree->root;
+	if(root != NULL){
+		disposeNodes(root->child);
+		free(root);
+	}
 }
