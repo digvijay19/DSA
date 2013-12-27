@@ -67,6 +67,16 @@ int remove(sList* list,int position){
     return 1;
 };
 
+void disposeList(sList *list){
+	Node *nextNode;
+    if(list->head == NULL)
+        return;
+    nextNode = list->head;
+    list->head = nextNode->next;
+    free(nextNode);
+    disposeList(list);
+}
+
 int isNextNodePresent(Iterator *it){
 	sList list;
 	if(NULL == it->list) return 0;
@@ -94,4 +104,13 @@ Iterator getIterator(sList *list){
 	it.hasNext = &isNextNodePresent;
 	it.next = &nextNodeInList;
 	return it;
+}
+
+int getIndex(sList *list,void* data,compare *comp){
+	Iterator it = getIterator(list);
+	while(it.hasNext(&it)){
+		if(comp(it.next(&it),data) == 0)
+			return it.position-1;
+	}
+	return -1;
 }

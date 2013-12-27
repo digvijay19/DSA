@@ -94,6 +94,21 @@ int main(){
 		test_remove_psition_is_not_present();
 	tearDown();
 	testEnded();
+	testStarted("test_getIndex_of_first_element_from_list");
+	setup();
+		test_getIndex_of_first_element_from_list();
+	tearDown();
+	testEnded();
+	testStarted("test_getIndex_of_last_element_from_list");
+	setup();
+		test_getIndex_of_last_element_from_list();
+	tearDown();
+	testEnded();
+	testStarted("test_getIndex_of_any_element_from_list");
+	setup();
+		test_getIndex_of_any_element_from_list();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

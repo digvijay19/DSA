@@ -8,7 +8,7 @@ void setup(){
 	list = createList();
 }
 void tearDown(){
-	free(list);
+	disposeList(list);
 }
 void test_insert_integer_node_in_empty_list(){
 	int element = 10;
@@ -52,5 +52,31 @@ void test_remove_psition_is_not_present(){
 	int element = 10;
 	ASSERT(1 == insert(list, &element, 0));
 	ASSERT(1 == insert(list, &element, 0));
-	ASSERT(0 == remove(list, 2));	
+	ASSERT(0 == remove(list, 2));
+}
+int compareInts(void *element,void *toSearch){
+	return *(int*)element - *(int*)toSearch;
+}
+void test_getIndex_of_first_element_from_list(){
+	int numbers[] = {1,2,3};
+	int toSearch = 1;
+	insert(list, &numbers[0], 0);
+	ASSERT(0 == getIndex(list, &toSearch, &compareInts));
+}
+void test_getIndex_of_last_element_from_list(){
+	int numbers[] = {1,2,3};
+	int toSearch = 3;
+	insert(list, &numbers[0], 0);
+	insert(list, &numbers[1], 1);
+	insert(list, &numbers[2], 2);
+	ASSERT(2 == getIndex(list, &toSearch, &compareInts));
+}
+void test_getIndex_of_any_element_from_list(){
+	int numbers[] = {1,2,3,4};
+	int toSearch = 2;
+	insert(list, &numbers[0], 0);
+	insert(list, &numbers[1], 1);
+	insert(list, &numbers[2], 2);
+	insert(list, &numbers[3], 3);
+	ASSERT(1 == getIndex(list, &toSearch, &compareInts));
 }

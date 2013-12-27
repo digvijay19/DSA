@@ -2,7 +2,7 @@
 #include "tree.h"
 #include <stdlib.h>
 
-//create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
+// create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 
 const int SUCCESS = 1;
 const int FAIL = 0;
@@ -11,14 +11,12 @@ Tree tree;
 int compareIntegers(void *a,void *b){
     return *(int*)a - *(int*)b;
 }
-
 void setup(){
     tree = create(compareIntegers);
 }
 void tearDown(){
     disposeTree(&tree);
 }
-
 void test_insert_root_node(){
     int data = 10;
     ASSERT(SUCCESS == insertInTree(&tree, NULL, &data));
