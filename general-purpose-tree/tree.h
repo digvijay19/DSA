@@ -1,22 +1,20 @@
 #include "../iterator.h"
 
-typedef int comparator(void* nodeData,void* parentData);
+typedef int compare(void* element,void* toSearch);
+typedef struct{
+	void* element;
+	void* next;
+} Node;
 
 typedef struct{
-	void* root;
-	comparator *comp;
-} Tree;
+	void* head;
+	int length;
+} sList;
 
-Tree create(comparator* areEqual);
-
-int insertInTree(Tree *tree, void *parentData, void *data);
-
-void* getRootData(Tree *tree);
-
-Iterator getChildren(Tree *tree, void *parentData);
-
-int search(Tree *tree,void* elementToSearch);
-
-int deleteFromTree(Tree *tree,void* dataToRemove);
-
-void disposeTree(Tree* tree);
+Node* createNode(void* element);
+sList* createList();
+int insert(sList* list,void* element,int position);
+int remove(sList* list,int position);
+Iterator getIterator(sList *list);
+void disposeList(sList *list);
+int getIndex(sList *list,void* data,compare *comp);
