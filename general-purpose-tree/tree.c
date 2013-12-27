@@ -91,6 +91,7 @@ int search(Tree *tree,void* elementToSearch){
 int deleteFromTree(Tree *tree,void* dataToRemove){
 	TreeNode *rootNode,*nodeToDelete,*parentNode;
 	Iterator it;
+	int result;
 	if(tree == NULL || dataToRemove == NULL) return 0;
 	rootNode = tree->root;
 	nodeToDelete = getTreeNodeByData(rootNode->child, dataToRemove, tree->comp);
@@ -101,11 +102,11 @@ int deleteFromTree(Tree *tree,void* dataToRemove){
 	
 	while(it.hasNext(&it)){
 		if(tree->comp(it.next(&it),nodeToDelete) == 0){
-			remove(parentNode->child,it.position);
+			result = remove(parentNode->child,it.position-1);
 			break;
 		}
 	}
-	return 1;
+	return result;
 }
 void disposeNodes(sList *list){
 	Iterator it ;
