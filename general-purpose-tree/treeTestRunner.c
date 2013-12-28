@@ -134,6 +134,11 @@ int main(){
 		test_remove_when_data_is_NULL();
 	tearDown();
 	testEnded();
+	testStarted("test_dispose_of_tree");
+	setup();
+		test_dispose_of_tree();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

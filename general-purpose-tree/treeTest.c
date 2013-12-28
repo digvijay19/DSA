@@ -59,10 +59,10 @@ void test_insert_node_under_second_child_node(){
 }
 void test_insert_when_tree_is_NULL(){
     int root = 1;
-    ASSERT(0 == insertInTree(NULL, NULL, &root));
+    ASSERT(FAIL == insertInTree(NULL, NULL, &root));
 }
 void test_insert_when_data_to_insert_is_NULL(){
-    ASSERT(0 == insertInTree(&tree, NULL, NULL));
+    ASSERT(FAIL == insertInTree(&tree, NULL, NULL));
 }
 void test_do_not_insert_when_data_is_already_present(){
     int root = 1;
@@ -70,12 +70,12 @@ void test_do_not_insert_when_data_is_already_present(){
     insertInTree(&tree, NULL, &root);
     insertInTree(&tree, &root, &children[0]);
     insertInTree(&tree, &root, &children[1]);
-    ASSERT( 0 == insertInTree(&tree, &root, &children[1]));
+    ASSERT( FAIL == insertInTree(&tree, &root, &children[1]));
 }
 void test_search_rootNode_in_tree(){
     int root = 10;
     insertInTree(&tree, NULL, &root);
-    ASSERT(1 == search(&tree,&root));
+    ASSERT(SUCCESS == search(&tree,&root));
 }
 void test_search_child_node_in_tree(){
     Tree tree = create(compareIntegers);
@@ -83,20 +83,20 @@ void test_search_child_node_in_tree(){
     int child = 2;
     insertInTree(&tree, NULL, &root);
     insertInTree(&tree, &root, &child);
-    ASSERT(1 == search(&tree,&child));   
+    ASSERT(SUCCESS == search(&tree,&child));   
 }
 void test_search_when_element_is_not_present(){
     int root = 1;
     int elementToSearch = 3;
     insertInTree(&tree, NULL, &root);
-    ASSERT(0 == search(&tree,&elementToSearch));
+    ASSERT(FAIL == search(&tree,&elementToSearch));
 }
 void test_search_when_tree_is_NULL(){
     int elementToSearch = 1;
-    ASSERT(0 == search(NULL,&elementToSearch));
+    ASSERT(FAIL == search(NULL,&elementToSearch));
 }
 void test_search_when_element_to_search_is_NULL(){
-    ASSERT(0 == search(&tree,NULL));
+    ASSERT(FAIL == search(&tree,NULL));
 }
 void test_remove_Node_from_tree(){
     int root = 1;
@@ -126,4 +126,14 @@ void test_remove_when_tree_is_NULL(){
 }
 void test_remove_when_data_is_NULL(){
     ASSERT(FAIL == deleteFromTree(&tree, NULL));
+}
+void test_dispose_of_tree(){
+    int root = 1;
+    int levelOneChildren[] = {2,3};
+    int levelTwoChildren[] = {4,5,6,7};
+    insertInTree(&tree, NULL, &root);
+    insertInTree(&tree, &root, &levelOneChildren[0]);
+    insertInTree(&tree, &root, &levelOneChildren[1]);
+    insertInTree(&tree, &levelOneChildren[0], &levelTwoChildren[0]);
+    insertInTree(&tree, &levelOneChildren[0], &levelTwoChildren[1]);
 }
