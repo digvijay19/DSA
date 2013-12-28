@@ -65,7 +65,7 @@ int insertInTree(Tree* tree, void *parentData, void *dataToInsert){
 	}
 	
 	rootNode = (TreeNode*)tree->root;
-	// if(search(tree,dataToInsert))	return 0;
+	if(search(tree,dataToInsert))	return 0;
 
 	if(0 == tree->comp(rootNode->data,parentData)){
 		newNode = createTreeNode(rootNode, dataToInsert);
@@ -108,17 +108,17 @@ int deleteFromTree(Tree *tree,void* dataToRemove){
 	}
 	return result;
 }
-void disposeNodes(sList *list){
+void disposeNodes(sList *nodesList){
 	Iterator it ;
 	sList* childList;
 	TreeNode *treeNode;
-	it = getIterator(list);
+	it = getIterator(nodesList);
 	while(it.hasNext(&it)){
 		treeNode = (TreeNode*)it.next(&it);
 		childList = (sList*)(treeNode->child);
 		disposeNodes(childList);
 	}
-	disposeList(list);
+	disposeList(nodesList);
 }
 void disposeTree(Tree* tree){
 	TreeNode *root = tree->root;

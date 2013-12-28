@@ -64,15 +64,14 @@ void test_insert_when_tree_is_NULL(){
 void test_insert_when_data_to_insert_is_NULL(){
     ASSERT(0 == insertInTree(&tree, NULL, NULL));
 }
-// void test_do_not_insert_when_data_is_already_present(){
-//     Tree tree = create(compareIntegers);
-//     int root = 1;
-//     int children[] = {2,3};
-//     insertInTree(&tree, NULL, &root);
-//     insertInTree(&tree, &root, &children[0]);
-//     insertInTree(&tree, &root, &children[1]);
-//     ASSERT( 0 == insertInTree(&tree, &root, &children[1]));
-// }
+void test_do_not_insert_when_data_is_already_present(){
+    int root = 1;
+    int children[] = {2,3};
+    insertInTree(&tree, NULL, &root);
+    insertInTree(&tree, &root, &children[0]);
+    insertInTree(&tree, &root, &children[1]);
+    ASSERT( 0 == insertInTree(&tree, &root, &children[1]));
+}
 void test_search_rootNode_in_tree(){
     int root = 10;
     insertInTree(&tree, NULL, &root);
@@ -102,7 +101,6 @@ void test_search_when_element_to_search_is_NULL(){
 void test_remove_Node_from_tree(){
     int root = 1;
     int child = 2;
-    Iterator children;
     insertInTree(&tree, NULL, &root);
     insertInTree(&tree, &root, &child);
     ASSERT(SUCCESS == deleteFromTree(&tree, &child));
@@ -110,7 +108,6 @@ void test_remove_Node_from_tree(){
 void test_remove_when_not_present(){
     int root = 1;
     int child = 2;
-    Iterator children;
     insertInTree(&tree, NULL, &root);
     ASSERT(FAIL == deleteFromTree(&tree, &child));
 }
@@ -118,7 +115,6 @@ void test_do_not_remove_when_children_are_present(){
     int root = 1;
     int levelOneChild = 2;
     int levelTwoChild = 3;
-    Iterator children;
     insertInTree(&tree, NULL, &root);
     insertInTree(&tree, &root, &levelOneChild);
     insertInTree(&tree, &levelOneChild, &levelTwoChild);

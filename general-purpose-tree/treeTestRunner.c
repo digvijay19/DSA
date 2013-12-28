@@ -79,6 +79,11 @@ int main(){
 		test_insert_when_data_to_insert_is_NULL();
 	tearDown();
 	testEnded();
+	testStarted("test_do_not_insert_when_data_is_already_present");
+	setup();
+		test_do_not_insert_when_data_is_already_present();
+	tearDown();
+	testEnded();
 	testStarted("test_search_rootNode_in_tree");
 	setup();
 		test_search_rootNode_in_tree();
