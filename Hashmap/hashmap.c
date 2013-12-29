@@ -27,19 +27,23 @@ HashElement* getElementFromList(sList *list,void* key,compare *comp){
 }
 // -------------------------------------------------------------------------------------
 
+void assignAllSlots(ArrayList *list){
+	int counter = 0;
+	while(counter < list->capacity){
+		addInArrayList(list, createSlot());
+		counter++;
+	}
+}
 
 Hashmap createHashmap(Comparator *comp,HashCodeGenerator *generator){
 	Hashmap map;
-	int index = 0;
 	map.bucket = createArrayList(10);
 	map.comp = comp;
 	map.hashCodeGenerator = generator;
-	while(index < map.bucket.capacity){
-		addInArrayList(&map.bucket, createSlot());
-		index++;
-	}
+	assignAllSlots(&map.bucket);
 	return map;
 }
+
 int getSlotIndex(Hashmap* hash,void* key){
 	return hash->hashCodeGenerator(key) % hash->bucket.capacity;
 }
