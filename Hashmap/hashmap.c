@@ -2,6 +2,17 @@
 #include "privateHashmap.h"
 #include <stdlib.h>
 
+int compareKeysOfHashElements(void* one,void* two){
+	HashElement *first,*second;
+	first = (HashElement*)one;
+	second = (HashElement*)two;
+	return first->key - second->key;
+}
+
+int getSlotIndex(Hashmap* hash,void* key){
+	return hash->hashCodeGenerator(key) % hash->bucket.capacity;
+}
+
 slot* createSlot(){
 	slot *slot = malloc(sizeof(slot));
 	slot->list = createList();
@@ -45,10 +56,6 @@ Hashmap createHashmap(Comparator *comp,HashCodeGenerator *generator){
 	return map;
 }
 
-int getSlotIndex(Hashmap* hash,void* key){
-	return hash->hashCodeGenerator(key) % hash->bucket.capacity;
-}
-
 sList* getListFromHashMap(Hashmap* hash,void* key){
 	slot *slotOfElement;
 	int slotNumber = getSlotIndex(hash,key);
@@ -60,8 +67,10 @@ int put(Hashmap* hash,void* key,void* value){
 	sList *list;
 	HashElement *hashElement;
 	if(hash == NULL || key == NULL) return 0;
+
 	list = getListFromHashMap(hash, key);
 	hashElement = getElementFromList(list,key,hash->comp);
+	
 	if(hashElement != NULL){
 		hashElement->value = value;
 		return 1;
@@ -71,18 +80,15 @@ int put(Hashmap* hash,void* key,void* value){
 }
 
 void* getValue(Hashmap* hash,void* key){
-	sList *list = getListFromHashMap(hash,key);
-	HashElement* element = getElementFromList(list,key,hash->comp);
+	sList *list;
+	HashElement* element;
+	if(hash == NULL || key == NULL)	return NULL;
+	list = getListFromHashMap(hash,key);
+	element = getElementFromList(list,key,hash->comp);
 	if(element == NULL)	return NULL;
 	return element->value;
 }
 
-int compareTwoHashElements(void* one,void* two){
-	HashElement *first,*second;
-	first = (HashElement*)one;
-	second = (HashElement*)two;
-	return first->key - second->key;
-}
 int removeFromHashMap(Hashmap *hash,void* key){
 	sList *list;
 	HashElement *hashElement;
@@ -90,6 +96,6 @@ int removeFromHashMap(Hashmap *hash,void* key){
 	if(hash == NULL || key == NULL) return 0;
 	list = getListFromHashMap(hash, key);
 	hashElement = getElementFromList(list,key,hash->comp);
-	index = getIndexFromList(list,hashElement,&compareTwoHashElements);
+	index = getIndexFromList(list,hashElement,&compareKeysOfHashElements);
 	return removeFromList(list,index);
 }

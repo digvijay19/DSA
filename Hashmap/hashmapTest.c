@@ -98,3 +98,10 @@ void test_put_when_key_is_present_but_value_is_NULL(){
 	int key = 2;
 	ASSERT(put(&map,&key,NULL) == SUCCESS);
 }
+void test_getValue_when_hashmap_is_NULL(){
+	int key = 2;
+	ASSERT(getValue(NULL, &key) == NULL);
+}
+void test_getValue_when_key_is_NULL(){
+	ASSERT(getValue(&map, NULL) == NULL);
+}
