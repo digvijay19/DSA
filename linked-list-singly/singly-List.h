@@ -11,10 +11,10 @@ typedef struct{
 	int length;
 } sList;
 
-Node* createNode(void* element);
+Node* createNodeOfList(void* element);
 sList* createList();
-int insert(sList* list,void* element,int position);
-int remove(sList* list,int position);
-Iterator getIterator(sList *list);
+int insertInList(sList* list,void* element,int position);
+int removeFromList(sList* list,int position);
+Iterator getIteratorForList(sList *list);
+int getIndexFromList(sList *list,void* data,compare *comp);
 void disposeList(sList *list);
-int getIndex(sList *list,void* data,compare *comp);

@@ -1,7 +1,7 @@
 #include "singly-List.h"
 #include <stdlib.h>
 
-Node* createNode(void* element){
+Node* createNodeOfList(void* element){
 	Node* node = calloc(1,sizeof(Node));
 	node->element = element;
 	node->next = NULL;
@@ -15,10 +15,10 @@ sList* createList(){
 	return list;
 }
 
-int insert(sList* list,void* element,int position){
+int insertInList(sList* list,void* element,int position){
 	int i;
 	Node *tempNode,*previousNode,*nextNode,*node;
-	node = createNode(element);
+	node = createNodeOfList(element);
     if(list == NULL) return 0;
 	if(position < 0 || position > list->length) return 0;
 
@@ -39,7 +39,7 @@ int insert(sList* list,void* element,int position){
 	return 1;
 }
 
-int remove(sList* list,int position){
+int removeFromList(sList* list,int position){
     int i;
     Node *prevoiusNode,*toDelete;
     if(list == NULL) return 0;
@@ -97,7 +97,7 @@ void* nextNodeInList(Iterator *it){
 	return currentNode->element;
 }
 
-Iterator getIterator(sList *list){
+Iterator getIteratorForList(sList *list){
 	Iterator it;
 	it.list = list;
 	it.position = 0;
@@ -106,8 +106,8 @@ Iterator getIterator(sList *list){
 	return it;
 }
 
-int getIndex(sList *list,void* data,compare *comp){
-	Iterator it = getIterator(list);
+int getIndexFromList(sList *list,void* data,compare *comp){
+	Iterator it = getIteratorForList(list);
 	while(it.hasNext(&it)){
 		if(comp(it.next(&it),data) == 0)
 			return it.position-1;
