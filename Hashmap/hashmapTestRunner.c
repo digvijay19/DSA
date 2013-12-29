@@ -99,6 +99,21 @@ int main(){
 		test_remove_from_hashMap_element_to_remove_is_NULL();
 	tearDown();
 	testEnded();
+	testStarted("test_do_not_put_when_hashmap_is_NULL");
+	setup();
+		test_do_not_put_when_hashmap_is_NULL();
+	tearDown();
+	testEnded();
+	testStarted("test_do_not_put_when_Key_is_NULL");
+	setup();
+		test_do_not_put_when_Key_is_NULL();
+	tearDown();
+	testEnded();
+	testStarted("test_put_when_key_is_present_but_value_is_NULL");
+	setup();
+		test_put_when_key_is_present_but_value_is_NULL();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

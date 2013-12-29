@@ -59,6 +59,7 @@ sList* getListFromHashMap(Hashmap* hash,void* key){
 int put(Hashmap* hash,void* key,void* value){
 	sList *list;
 	HashElement *hashElement;
+	if(hash == NULL || key == NULL) return 0;
 	list = getListFromHashMap(hash, key);
 	hashElement = getElementFromList(list,key,hash->comp);
 	if(hashElement != NULL){

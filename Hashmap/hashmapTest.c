@@ -85,3 +85,16 @@ void test_remove_from_hashMap_hashmap_is_NULL(){
 void test_remove_from_hashMap_element_to_remove_is_NULL(){
 	ASSERT(removeFromHashMap(&map,NULL) == FAIL);
 }
+void test_do_not_put_when_hashmap_is_NULL(){
+	int value = 20;
+	int key = 2;
+	ASSERT(put(NULL,&key,&value) == FAIL);
+}
+void test_do_not_put_when_Key_is_NULL(){
+	int value = 20;
+	ASSERT(put(&map,NULL,&value) == FAIL);
+}
+void test_put_when_key_is_present_but_value_is_NULL(){
+	int key = 2;
+	ASSERT(put(&map,&key,NULL) == SUCCESS);
+}
