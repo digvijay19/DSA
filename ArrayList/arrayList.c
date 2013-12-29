@@ -57,7 +57,7 @@ Iterator getIterator(ArrayList *list){
 
 // -------------------------------------------------------------------------------
 
-ArrayList create(int capacity) {
+ArrayList createArrayList(int capacity) {
 	ArrayList list;
 	list.base = (void*)malloc(sizeof(void*) * capacity);
 	list.capacity = capacity;
@@ -65,7 +65,7 @@ ArrayList create(int capacity) {
 	return list;
 }
 
-int insert(ArrayList *list, int index, void* data) {
+int insertInArrayList(ArrayList *list, int index, void* data) {
 	if (list == NULL) return 0;
 	if (index < 0 || index > list->length) return 0;
 
@@ -78,7 +78,7 @@ int insert(ArrayList *list, int index, void* data) {
 	return 1;
 }
 
-int add(ArrayList *list, void* data){
+int addInArrayList(ArrayList *list, void* data){
 	if (list == NULL) return 0;
 
 	increaseCapacity(list);
@@ -89,7 +89,7 @@ int add(ArrayList *list, void* data){
 	return 1;
 }
 
-void* remove(ArrayList *list, int index ){
+void* removeFromArrayList(ArrayList *list, int index ){
 	void* toRemove;
 	if(index >= list->length || index < 0 ) return NULL;
 	toRemove = list->base[index];
@@ -100,12 +100,12 @@ void* remove(ArrayList *list, int index ){
 }
 
 
-void* get(ArrayList *list, int index) {
+void* getFromArrayList(ArrayList *list, int index) {
 	if (index < 0 || index >= list->length) return NULL;
 	return list->base[index];
 }
 
-int search(ArrayList *list,void* data,compareFunc *comp){
+int searchInArrayList(ArrayList *list,void* data,compareFunc *comp){
 	Iterator it = getIterator(list);
 	while(it.hasNext(&it)){
 		if(comp(it.next(&it),data) == 0)
@@ -114,6 +114,6 @@ int search(ArrayList *list,void* data,compareFunc *comp){
 	return -1;
 }
 
-void dispose(ArrayList *list) {
+void disposeArraylist(ArrayList *list) {
 	free(list->base);
 }

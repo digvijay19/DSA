@@ -20,129 +20,129 @@ ArrayList *internsPtr;
 
 void setup() {
 	int noOfElements = 2;	
-	interns = create(noOfElements);
+	interns = createArrayList(noOfElements);
 	internsPtr = &interns;
 }
 
 void tearDown() {
-	dispose(internsPtr);	
+	disposeArraylist(internsPtr);	
 }
 
 void test_insert_element(){
-	int result = insert(internsPtr, 0, &prateek);
+	int result = insertInArrayList(internsPtr, 0, &prateek);
 
-	Intern *actual = (Intern*)get(internsPtr, 0);
+	Intern *actual = (Intern*)getFromArrayList(internsPtr, 0);
 	ASSERT(result == SUCCESS);
 	ASSERT(prateek.id == actual->id);
 }
 
 void test_insert_multiple_elements() {
-	insert(internsPtr, 0, &prateek);
-	insert(internsPtr, 1, &ji);
-	ASSERT(&prateek == get(internsPtr, 0));
-	ASSERT(&ji == get(internsPtr, 1));
+	insertInArrayList(internsPtr, 0, &prateek);
+	insertInArrayList(internsPtr, 1, &ji);
+	ASSERT(&prateek == getFromArrayList(internsPtr, 0));
+	ASSERT(&ji == getFromArrayList(internsPtr, 1));
 }
 
 void test_interns_grows_beyond_capacity() {
 	int noOfElements = 1;
-	ArrayList list = create(noOfElements);
+	ArrayList list = createArrayList(noOfElements);
 	ArrayList *listPtr = &list;
 
-	insert(listPtr, 0, &prateek);
-	insert(listPtr, 1, &ji);
+	insertInArrayList(listPtr, 0, &prateek);
+	insertInArrayList(listPtr, 1, &ji);
 
-	ASSERT(&prateek == get(listPtr, 0));
-	ASSERT(&ji == get(listPtr, 1));
+	ASSERT(&prateek == getFromArrayList(listPtr, 0));
+	ASSERT(&ji == getFromArrayList(listPtr, 1));
 
-	dispose(listPtr);		
+	disposeArraylist(listPtr);		
 }
 
 void test_should_not_insert_at_index_beyond_length() {
 	int result = FAILURE;
-	result = insert(internsPtr, 2, &prateek);
+	result = insertInArrayList(internsPtr, 2, &prateek);
 	ASSERT(result == FAILURE);
 }
 
 void test_should_not_insert_at_negative_index() {
 	int result = FAILURE;
-	result = insert(internsPtr, -1, &prateek);
+	result = insertInArrayList(internsPtr, -1, &prateek);
 	ASSERT(result == FAILURE);
 }
 
 void test_insert_at_middle_should_shift_the_elements() {
 	Intern tanbirka = {43343, "Tanbir Ka"};
-	insert(internsPtr, 0, &prateek);
-	insert(internsPtr, 1, &ji);
-	insert(internsPtr, 1, &tanbirka);
+	insertInArrayList(internsPtr, 0, &prateek);
+	insertInArrayList(internsPtr, 1, &ji);
+	insertInArrayList(internsPtr, 1, &tanbirka);
 	
-	ASSERT(&prateek == get(internsPtr, 0));
-	ASSERT(&tanbirka == get(internsPtr, 1));
-	ASSERT(&ji == get(internsPtr, 2));
+	ASSERT(&prateek == getFromArrayList(internsPtr, 0));
+	ASSERT(&tanbirka == getFromArrayList(internsPtr, 1));
+	ASSERT(&ji == getFromArrayList(internsPtr, 2));
 }
 
 void test_should_not_insert_when_list_is_null() {
-	int result = insert(NULL, 1, &prateek);
+	int result = insertInArrayList(NULL, 1, &prateek);
 	ASSERT(result == FAILURE);
 }
 void test_add_element_when_list_is_empty(){
-	int result = add(internsPtr, &prateek);
+	int result = addInArrayList(internsPtr, &prateek);
 
-	Intern *actual = (Intern*)get(internsPtr, 0);
+	Intern *actual = (Intern*)getFromArrayList(internsPtr, 0);
 	ASSERT(result == SUCCESS);
 	ASSERT(prateek.id == actual->id);
 }
 
 void test_add_multiple_elements() {
-	add(internsPtr, &prateek);
-	add(internsPtr, &ji);
-	ASSERT(&prateek == get(internsPtr, 0));
-	ASSERT(&ji == get(internsPtr, 1));
+	addInArrayList(internsPtr, &prateek);
+	addInArrayList(internsPtr, &ji);
+	ASSERT(&prateek == getFromArrayList(internsPtr, 0));
+	ASSERT(&ji == getFromArrayList(internsPtr, 1));
 }
 void test_add_list_grows_beyond_capacity() {
 	int noOfElements = 1;
-	ArrayList list = create(noOfElements);
+	ArrayList list = createArrayList(noOfElements);
 	ArrayList *listPtr = &list;
 
-	add(listPtr, &prateek);
-	add(listPtr, &ji);
+	addInArrayList(listPtr, &prateek);
+	addInArrayList(listPtr, &ji);
 
-	ASSERT(&prateek == get(listPtr, 0));
-	ASSERT(&ji == get(listPtr, 1));
+	ASSERT(&prateek == getFromArrayList(listPtr, 0));
+	ASSERT(&ji == getFromArrayList(listPtr, 1));
 
-	dispose(listPtr);		
+	disposeArraylist(listPtr);
 }
 void test_should_not_add_when_list_is_null() {
-	int result = add(NULL, &prateek);
+	int result = addInArrayList(NULL, &prateek);
 	ASSERT(result == FAILURE);
 }
 void test_remove_element(){
 	Intern *result ;
-	add(internsPtr, &prateek);
-	result = remove(internsPtr,0); 
+	addInArrayList(internsPtr, &prateek);
+	result = removeFromArrayList(internsPtr,0); 
 	ASSERT(result == &prateek);
 	ASSERT(internsPtr->length == 0);
 }
 void test_remove_element_when_multiple_elements_present(){
 	Intern *result ;
-	add(internsPtr, &prateek);
-	add(internsPtr, &ji);
-	result = remove(internsPtr,0); 
+	addInArrayList(internsPtr, &prateek);
+	addInArrayList(internsPtr, &ji);
+	result = removeFromArrayList(internsPtr,0); 
 	ASSERT(result == &prateek);
-	ASSERT(&ji == get(internsPtr, 0));
+	ASSERT(&ji == getFromArrayList(internsPtr, 0));
 	ASSERT(internsPtr->length == 1);
 }
 void test_remove_element_when_index_element_not_present(){
 	void* result;
-	add(internsPtr, &prateek);
-	add(internsPtr, &ji);
-	result = remove(internsPtr, 3);
+	addInArrayList(internsPtr, &prateek);
+	addInArrayList(internsPtr, &ji);
+	result = removeFromArrayList(internsPtr, 3);
 	ASSERT(result == NULL);
 }
 void test_remove_element_when_index_is_negative(){
 	void* result;
-	add(internsPtr, &prateek);
-	add(internsPtr, &ji);
-	result = remove(internsPtr, -1);
+	addInArrayList(internsPtr, &prateek);
+	addInArrayList(internsPtr, &ji);
+	result = removeFromArrayList(internsPtr, -1);
 	ASSERT(result == NULL);
 }
 int compareInt(void *one,void* two){
@@ -150,24 +150,24 @@ int compareInt(void *one,void* two){
 }
 void test_search_integer_from_list(){
 	int result;
-	ArrayList list = create(2);
+	ArrayList list = createArrayList(2);
 	ArrayList *listPtr = &list;
 	int _10 = 10;
 	int _20 = 20;
-	add(listPtr, &_10);
-	add(listPtr, &_20);
-	result = search(listPtr,&_20, &compareInt);
+	addInArrayList(listPtr, &_10);
+	addInArrayList(listPtr, &_20);
+	result = searchInArrayList(listPtr,&_20, &compareInt);
 	ASSERT(result == 1);
 }
 void test_search_when_element_not_present(){
 	int result;
-	ArrayList list = create(2);
+	ArrayList list = createArrayList(2);
 	ArrayList *listPtr = &list;
 	int _10 = 10;
 	int _20 = 20;
 	int toSeach = 30;
-	add(listPtr, &_10);
-	add(listPtr, &_20);
-	result = search(listPtr,&toSeach, &compareInt);
+	addInArrayList(listPtr, &_10);
+	addInArrayList(listPtr, &_20);
+	result = searchInArrayList(listPtr,&toSeach, &compareInt);
 	ASSERT(result == -1);
 }

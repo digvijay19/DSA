@@ -8,16 +8,16 @@ typedef struct {
 
 typedef int compareFunc(void* one,void* two);
 
-ArrayList create(int capacity);
+ArrayList createArrayList(int capacity);
 
-int insert(ArrayList *list, int index, void* data);
+int insertInArrayList(ArrayList *list, int index, void* data);
 
-int add(ArrayList *list, void* data);
+int addInArrayList(ArrayList *list, void* data);
 
-void* remove(ArrayList *list, int index );
+void* removeFromArrayList(ArrayList *list, int index );
 
-void* get(ArrayList *list, int index);
+void* getFromArrayList(ArrayList *list, int index);
 
-int search(ArrayList *list,void* data,compareFunc *comp);
+int searchInArrayList(ArrayList *list,void* data,compareFunc *comp);
 
-void dispose(ArrayList *list);
+void disposeArraylist(ArrayList *list);
