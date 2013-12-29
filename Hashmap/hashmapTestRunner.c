@@ -54,13 +54,21 @@ int main(){
 		test_put_one_into_hashmap();
 	tearDown();
 	testEnded();
+	testStarted("test_getValue_when_element_present");
+	setup();
+		test_getValue_when_element_present();
+	tearDown();
+	testEnded();
+	testStarted("test_getValue_when_element_not_present");
+	setup();
+		test_getValue_when_element_not_present();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
 	return 0;
 }
-
-void setup(){}
 
 void tearDown(){}
 
