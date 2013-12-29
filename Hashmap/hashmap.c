@@ -86,6 +86,7 @@ int removeFromHashMap(Hashmap *hash,void* key){
 	sList *list;
 	HashElement *hashElement;
 	int index;
+	if(hash == NULL || key == NULL) return 0;
 	list = getListFromHashMap(hash, key);
 	hashElement = getElementFromList(list,key,hash->comp);
 	index = getIndexFromList(list,hashElement,&compareTwoHashElements);

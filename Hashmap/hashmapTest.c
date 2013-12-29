@@ -71,3 +71,17 @@ void test_remove_from_hashMap(){
 	ASSERT(removeFromHashMap(&map,&key) == SUCCESS);
 	ASSERT(getValue(&map,&key) == NULL);
 }
+void test_remove_from_hashMap_when_element_not_present(){
+	int value = 20;
+	int key = 2;
+	int KeyToRemove = 3;
+	ASSERT(put(&map,&key,&value) == SUCCESS);
+	ASSERT(removeFromHashMap(&map,&KeyToRemove) == FAIL);
+}
+void test_remove_from_hashMap_hashmap_is_NULL(){
+	int KeyToRemove = 3;
+	ASSERT(removeFromHashMap(NULL,&KeyToRemove) == FAIL);
+}
+void test_remove_from_hashMap_element_to_remove_is_NULL(){
+	ASSERT(removeFromHashMap(&map,NULL) == FAIL);
+}

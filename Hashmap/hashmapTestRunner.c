@@ -84,6 +84,21 @@ int main(){
 		test_remove_from_hashMap();
 	tearDown();
 	testEnded();
+	testStarted("test_remove_from_hashMap_when_element_not_present");
+	setup();
+		test_remove_from_hashMap_when_element_not_present();
+	tearDown();
+	testEnded();
+	testStarted("test_remove_from_hashMap_hashmap_is_NULL");
+	setup();
+		test_remove_from_hashMap_hashmap_is_NULL();
+	tearDown();
+	testEnded();
+	testStarted("test_remove_from_hashMap_element_to_remove_is_NULL");
+	setup();
+		test_remove_from_hashMap_element_to_remove_is_NULL();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
