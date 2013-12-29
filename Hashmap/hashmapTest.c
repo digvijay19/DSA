@@ -4,6 +4,9 @@
 
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 
+const int SUCCESS = 1;
+const int FAIL = 0;
+
 int compareIntegers(void* one,void* two){
 	return *(int*)one - *(int*)two;
 }
@@ -14,5 +17,5 @@ void test_put_into_hashmap(){
 	Hashmap map = createHashmap(&compareIntegers, &keyGenerator);
 	int value = 20;
 	int key = 2;
-	ASSERT(put(&map,&key,&value));
+	ASSERT(put(&map,&key,&value) == SUCCESS);
 }
