@@ -64,3 +64,10 @@ void test_put_updates_value_when_key_is_already_present(){
 	ASSERT(put(&map,&key,&values[1]) == SUCCESS);
 	ASSERT(getValue(&map,&key) == &values[1]);
 }
+void test_remove_from_hashMap(){
+	int value = 20;
+	int key = 2;
+	ASSERT(put(&map,&key,&value) == SUCCESS);
+	ASSERT(removeFromHashMap(&map,&key) == SUCCESS);
+	ASSERT(getValue(&map,&key) == NULL);
+}

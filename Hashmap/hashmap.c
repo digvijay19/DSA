@@ -25,6 +25,7 @@ HashElement* getElementFromList(sList *list,void* key,compare *comp){
 	}
 	return NULL;
 }
+
 // -------------------------------------------------------------------------------------
 
 void assignAllSlots(ArrayList *list){
@@ -73,4 +74,20 @@ void* getValue(Hashmap* hash,void* key){
 	HashElement* element = getElementFromList(list,key,hash->comp);
 	if(element == NULL)	return NULL;
 	return element->value;
+}
+
+int compareTwoHashElements(void* one,void* two){
+	HashElement *first,*second;
+	first = (HashElement*)one;
+	second = (HashElement*)two;
+	return first->key - second->key;
+}
+int removeFromHashMap(Hashmap *hash,void* key){
+	sList *list;
+	HashElement *hashElement;
+	int index;
+	list = getListFromHashMap(hash, key);
+	hashElement = getElementFromList(list,key,hash->comp);
+	index = getIndexFromList(list,hashElement,&compareTwoHashElements);
+	return removeFromList(list,index);
 }

@@ -79,6 +79,11 @@ int main(){
 		test_put_updates_value_when_key_is_already_present();
 	tearDown();
 	testEnded();
+	testStarted("test_remove_from_hashMap");
+	setup();
+		test_remove_from_hashMap();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
