@@ -11,8 +11,13 @@ typedef struct{
 } Hashmap;
 
 Hashmap createHashmap(Comparator *comp,HashCodeGenerator *generator);
+
 int put(Hashmap* hash,void* key,void* value);
+
 void* getValue(Hashmap* hash,void* key);
+
 int removeFromHashMap(Hashmap *hash,void* key);
+
 Iterator keys(Hashmap *hash);
+
 void disposeHashmap(Hashmap *hash);

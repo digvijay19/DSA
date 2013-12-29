@@ -30,13 +30,39 @@ Hashmap createHashmap(Comparator *comp,HashCodeGenerator *generator){
 	}
 	return map;
 }
-int put(Hashmap* hash,void* key,void* value){
+int getSlotIndex(Hashmap* hash,void* key){
+	return hash->hashCodeGenerator(key) % hash->bucket.capacity;
+}
+
+sList* getListFromHashMap(Hashmap* hash,void* key){
 	slot *slotOfElement;
+	int slotNumber = getSlotIndex(hash,key);
+	slotOfElement = getFromArrayList(&hash->bucket,slotNumber);
+	return slotOfElement->list;
+}
+
+int put(Hashmap* hash,void* key,void* value){
 	sList *list;
 	HashElement *hashElement;
-	int slotNumber = hash->hashCodeGenerator(key);
-	slotOfElement = getFromArrayList(&hash->bucket,slotNumber);
-	list = slotOfElement->list;
+	list = getListFromHashMap(hash, key);
 	hashElement = getHashElement(key,value);
 	return insertInList(list, hashElement,list->length);
+}
+
+HashElement* getElementFromList(sList *list,void* key,compare *comp){
+	HashElement *temp;
+	Iterator it = getIteratorForList(list);
+	while(it.hasNext(&it)){
+		temp = it.next(&it);
+		if(comp(temp->key , key) == 0)
+			return temp;
+	}
+	return NULL;
+}
+
+void* getValue(Hashmap* hash,void* key){
+	sList *list = getListFromHashMap(hash,key);
+	HashElement* element = getElementFromList(list,key,hash->comp);
+	if(element == NULL)	return NULL;
+	return element->value;
 }

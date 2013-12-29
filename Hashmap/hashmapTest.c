@@ -7,15 +7,16 @@
 const int SUCCESS = 1;
 const int FAIL = 0;
 
-int compareIntegers(void* one,void* two){
+int compareKeys(void* one,void* two){
 	return *(int*)one - *(int*)two;
 }
 int keyGenerator(void* key){
 	return *(int*)key;
 }
-void test_put_into_hashmap(){
-	Hashmap map = createHashmap(&compareIntegers, &keyGenerator);
+void test_put_one_into_hashmap(){
+	Hashmap map = createHashmap(&compareKeys, &keyGenerator);
 	int value = 20;
 	int key = 2;
 	ASSERT(put(&map,&key,&value) == SUCCESS);
+	ASSERT(getValue(&map,&key) == &value);
 }

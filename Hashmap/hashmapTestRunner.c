@@ -49,9 +49,9 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_put_into_hashmap");
+	testStarted("test_put_one_into_hashmap");
 	setup();
-		test_put_into_hashmap();
+		test_put_one_into_hashmap();
 	tearDown();
 	testEnded();
 
