@@ -8,13 +8,23 @@ slot* createSlot(){
 	return slot;
 }
 
-HashElement *getHashElement(void* key,void*value){
+HashElement *createHashElement(void* key,void*value){
 	HashElement *hashElement = malloc(sizeof(HashElement));
 	hashElement->key = key;
 	hashElement->value = value;
 	return hashElement;
 }
 
+HashElement* getElementFromList(sList *list,void* key,compare *comp){
+	HashElement *temp;
+	Iterator it = getIteratorForList(list);
+	while(it.hasNext(&it)){
+		temp = it.next(&it);
+		if(comp(temp->key , key) == 0)
+			return temp;
+	}
+	return NULL;
+}
 // -------------------------------------------------------------------------------------
 
 
@@ -45,19 +55,13 @@ int put(Hashmap* hash,void* key,void* value){
 	sList *list;
 	HashElement *hashElement;
 	list = getListFromHashMap(hash, key);
-	hashElement = getHashElement(key,value);
-	return insertInList(list, hashElement,list->length);
-}
-
-HashElement* getElementFromList(sList *list,void* key,compare *comp){
-	HashElement *temp;
-	Iterator it = getIteratorForList(list);
-	while(it.hasNext(&it)){
-		temp = it.next(&it);
-		if(comp(temp->key , key) == 0)
-			return temp;
+	hashElement = getElementFromList(list,key,hash->comp);
+	if(hashElement != NULL){
+		hashElement->value = value;
+		return 1;
 	}
-	return NULL;
+	hashElement = createHashElement(key,value);
+	return insertInList(list, hashElement,list->length);
 }
 
 void* getValue(Hashmap* hash,void* key){

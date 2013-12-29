@@ -49,9 +49,19 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_put_one_into_hashmap");
+	testStarted("test_put_one_element_into_hashmap");
 	setup();
-		test_put_one_into_hashmap();
+		test_put_one_element_into_hashmap();
+	tearDown();
+	testEnded();
+	testStarted("test_put_two_elements_in_same_slot_of_hashMap");
+	setup();
+		test_put_two_elements_in_same_slot_of_hashMap();
+	tearDown();
+	testEnded();
+	testStarted("test_put_multiple_elements_in_different_slots_of_hashMap");
+	setup();
+		test_put_multiple_elements_in_different_slots_of_hashMap();
 	tearDown();
 	testEnded();
 	testStarted("test_getValue_when_element_present");
@@ -62,6 +72,11 @@ int main(){
 	testStarted("test_getValue_when_element_not_present");
 	setup();
 		test_getValue_when_element_not_present();
+	tearDown();
+	testEnded();
+	testStarted("test_put_updates_value_when_key_is_already_present");
+	setup();
+		test_put_updates_value_when_key_is_already_present();
 	tearDown();
 	testEnded();
 

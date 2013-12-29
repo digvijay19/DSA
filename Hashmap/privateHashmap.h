@@ -10,4 +10,7 @@ typedef struct{
 } HashElement;
 
 slot* createSlot();
-HashElement *getHashElement(void* key,void* value);
+
+HashElement *createHashElement(void* key,void* value);
+
+HashElement* getElementFromList(sList *list,void* key,compare *comp);
