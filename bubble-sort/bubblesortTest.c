@@ -4,13 +4,15 @@
 
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 
-float compareIntegers(void* one,void* two){
+int compareIntegers(void* one,void* two){
 	return *(int*)one - *(int*)two;
 }
-float compareFloats(void* one,void* two){
+int compareFloats(void* one,void* two){
 	return *(float*)one - *(float*)two;
 }
-
+int compareDoubles(void* one,void* two){
+	return *(double*)one - *(double*)two;
+}
 void test_bubble_sort_array_of_integers(){
     int actual[] = {2,3,1};
     int expected[] = {1,2,3};
@@ -45,5 +47,23 @@ void test_bubble_sort_array_of_floats_worst_case(){
     float actual[] = {3.0,2.0,1.0};
     float expected[] = {1.0,2.0,3.0};
     bubbleSort(actual, 3, sizeof(float), compareFloats);
+    ASSERT(0 == memcmp(expected, actual, sizeof(expected)));
+}
+void test_bubble_sort_array_of_doubles(){
+    double actual[] = {2.0f,3.0f,1.0f};
+    double expected[] = {1.0f,2.0f,3.0f};
+    bubbleSort(actual, 3, sizeof(double), compareDoubles);
+    ASSERT(0 == memcmp(expected, actual, sizeof(expected)));
+}
+void test_bubble_sort_array_of_doubles_best_case(){
+    double actual[] = {1.0f,2.0f,3.0f};
+    double expected[] = {1.0f,2.0f,3.0f};
+    bubbleSort(actual, 3, sizeof(double), compareDoubles);
+    ASSERT(0 == memcmp(expected, actual, sizeof(expected)));
+}
+void test_bubble_sort_array_of_doubles_worst_case(){
+    double actual[] = {3.0f,2.0f,1.0f};
+    double expected[] = {1.0f,2.0f,3.0f};
+    bubbleSort(actual, 3, sizeof(double), compareDoubles);
     ASSERT(0 == memcmp(expected, actual, sizeof(expected)));
 }

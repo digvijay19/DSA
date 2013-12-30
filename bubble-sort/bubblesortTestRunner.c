@@ -79,6 +79,21 @@ int main(){
 		test_bubble_sort_array_of_floats_worst_case();
 	tearDown();
 	testEnded();
+	testStarted("test_bubble_sort_array_of_doubles");
+	setup();
+		test_bubble_sort_array_of_doubles();
+	tearDown();
+	testEnded();
+	testStarted("test_bubble_sort_array_of_doubles_best_case");
+	setup();
+		test_bubble_sort_array_of_doubles_best_case();
+	tearDown();
+	testEnded();
+	testStarted("test_bubble_sort_array_of_doubles_worst_case");
+	setup();
+		test_bubble_sort_array_of_doubles_worst_case();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
