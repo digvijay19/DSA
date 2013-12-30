@@ -2,45 +2,46 @@
 #include <stdlib.h>
 #include <memory.h>
 
-void merge(void **destination,  void** leftBase, void** rightBase, size_t leftLength,size_t rightLength, compare comp){
+void mergeAll(void **base,  void** lBase, void** rBase, int leftLength,int rightLength, compare cmp){
     int i = 0,j = 0,k = 0;
-    for(; i < leftLength && j < rightLength;){
-        if(comp(leftBase[i], rightBase[j]) < 0){
-            destination[k] = leftBase[i];
+    while( i < leftLength && j < rightLength){
+        if(cmp(lBase[i], rBase[j]) < 0){
+            base[k] = lBase[i];
             i++;
         }
         else{
-            destination[k] = rightBase[j];
+            base[k] = rBase[j];
             j++;
         }
         k++;
     }
     while(i < leftLength){
-        destination[k] = leftBase[i];
+        base[k] = lBase[i];
         i++;k++;
     }
     while(j < rightLength){
-        destination[k] = rightBase[i];
+        base[k] = rBase[i];
         j++;k++;
     }
 }
 
 void mSort(void** base, int numberOfElements , compare comp){
-	int mid = numberOfElements/2;
-    int leftLength = mid;
+	int centerIndex = numberOfElements/2;
+    int leftLength = centerIndex;
     int i;
-    int rightLength = numberOfElements - mid;
+    int rightLength = numberOfElements - centerIndex;
     void** leftSide = calloc(leftLength, sizeof(void*));
     void** rightSide = calloc(rightLength, sizeof(void*));
+    if(numberOfElements <= 1) return;
     for(i = 0; i < leftLength ;i++){
-            leftSide[i] = base[i];
+        leftSide[i] = base[i];
     }
-    for(i = mid; i < numberOfElements ;i++){
-            rightSide[i-mid] = base[i];
+    for(i = centerIndex; i < numberOfElements ;i++){
+        rightSide[i-centerIndex] = base[i];
     }
     mSort(leftSide, leftLength, comp);
     mSort(rightSide, rightLength, comp);
-    merge(base, leftSide, rightSide, leftLength, rightLength, comp);
+    mergeAll(base, leftSide, rightSide, leftLength, rightLength, comp);
     free(leftSide);
     free(rightSide);
 }
