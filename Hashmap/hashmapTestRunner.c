@@ -140,8 +140,6 @@ int main(){
 	return 0;
 }
 
-void tearDown(){}
-
 void fixtureSetup(){}
 
 void fixtureTearDown(){}

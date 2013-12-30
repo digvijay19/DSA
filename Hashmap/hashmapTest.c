@@ -20,6 +20,10 @@ void setup(){
 	map = createHashmap(&compareKeys, &keyGenerator);
 }
 
+void tearDown(){
+	disposeHashmap(&map);
+}
+
 void test_put_one_element_into_hashmap(){
 	int value = 20;
 	int key = 2;
