@@ -124,6 +124,16 @@ int main(){
 		test_getValue_when_key_is_NULL();
 	tearDown();
 	testEnded();
+	testStarted("test_keys_gives_iterator_for_hashmap");
+	setup();
+		test_keys_gives_iterator_for_hashmap();
+	tearDown();
+	testEnded();
+	testStarted("test_keys_gives_iterator_for_hashmap_when_multiple_elements_present");
+	setup();
+		test_keys_gives_iterator_for_hashmap_when_multiple_elements_present();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

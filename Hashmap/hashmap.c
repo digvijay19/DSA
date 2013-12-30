@@ -52,6 +52,7 @@ Hashmap createHashmap(Comparator *comp,HashCodeGenerator *generator){
 	map.bucket = createArrayList(10);
 	map.comp = comp;
 	map.hashCodeGenerator = generator;
+	map.keys = createList();
 	assignAllSlots(&map.bucket);
 	return map;
 }
@@ -93,9 +94,34 @@ int removeFromHashMap(Hashmap *hash,void* key){
 	sList *list;
 	HashElement *hashElement;
 	int index;
-	if(hash == NULL || key == NULL) return 0;
+	if(hash == NULL || key == NULL)	return 0;
 	list = getListFromHashMap(hash, key);
 	hashElement = getElementFromList(list,key,hash->comp);
 	index = getIndexFromList(list,hashElement,&compareKeysOfHashElements);
 	return removeFromList(list,index);
+}
+
+void* nextKey(Iterator *it){
+	return it->next(it);
+};
+
+int hasNextKey(Iterator *it){
+	return it->hasNext(it);
+};
+
+Iterator keys(Hashmap *hash){
+	Iterator listIT,keysIT,arrayIT;
+	slot *slot;
+	sList *keys = hash->keys;
+
+	arrayIT = getIterator(&hash->bucket);
+	while(arrayIT.hasNext(&arrayIT)){
+		slot = arrayIT.next(&arrayIT);
+		listIT = getIteratorForList(slot->list);
+		while(listIT.hasNext(&listIT)){
+			insertInList(keys, listIT.next(&listIT),keys->length);
+		}
+	}
+	keysIT = getIteratorForList(keys);
+	return keysIT;
 }

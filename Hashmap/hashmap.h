@@ -8,6 +8,7 @@ typedef struct{
 	ArrayList bucket;
 	Comparator *comp;
 	HashCodeGenerator *hashCodeGenerator;
+	void* keys;
 } Hashmap;
 
 Hashmap createHashmap(Comparator *comp,HashCodeGenerator *generator);

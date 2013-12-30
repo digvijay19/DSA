@@ -13,10 +13,13 @@ int compareKeys(void* one,void* two){
 int keyGenerator(void* key){
 	return *(int*)key;
 }
+
 Hashmap map;
+
 void setup(){
 	map = createHashmap(&compareKeys, &keyGenerator);
 }
+
 void test_put_one_element_into_hashmap(){
 	int value = 20;
 	int key = 2;
@@ -104,4 +107,31 @@ void test_getValue_when_hashmap_is_NULL(){
 }
 void test_getValue_when_key_is_NULL(){
 	ASSERT(getValue(&map, NULL) == NULL);
+}
+void test_keys_gives_iterator_for_hashmap(){
+	int value = 20;
+	int key = 1;
+	Iterator it;
+	HashElement *temp;
+	put(&map,&key,&value);
+	it = keys(&map);
+	temp = it.next(&it);
+	ASSERT(temp->key == &key);
+}
+void test_keys_gives_iterator_for_hashmap_when_multiple_elements_present(){
+	int values[] = {10,20,30,40};
+	int key[] = {1,2,3,4};
+	Iterator it;
+	int i = 0;
+	HashElement *temp;
+	for(i=0;i<4;i++){
+		put(&map,&key[i],&values[i]);
+	}
+	it = keys(&map);
+	i = 0;
+	while(it.hasNext(&it)){
+		temp = it.next(&it);
+		ASSERT(temp->key == &key[i]);
+		i++;
+	}
 }
