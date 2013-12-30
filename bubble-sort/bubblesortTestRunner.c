@@ -94,6 +94,21 @@ int main(){
 		test_bubble_sort_array_of_doubles_worst_case();
 	tearDown();
 	testEnded();
+	testStarted("test_bubble_sort_array_of_String");
+	setup();
+		test_bubble_sort_array_of_String();
+	tearDown();
+	testEnded();
+	testStarted("test_bubble_sort_array_of_String_best_case");
+	setup();
+		test_bubble_sort_array_of_String_best_case();
+	tearDown();
+	testEnded();
+	testStarted("test_bubble_sort_array_of_String_worst_case");
+	setup();
+		test_bubble_sort_array_of_String_worst_case();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
