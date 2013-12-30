@@ -2,46 +2,46 @@
 #include <stdlib.h>
 #include <memory.h>
 
-void mergeAll(void **base,  void** lBase, void** rBase, int leftLength,int rightLength, compare cmp){
-    int i = 0,j = 0,k = 0;
+void mergeAll(void **base,  void** leftArrayBase, void** rightArrayBase, int leftLength,int rightLength, compare cmp){
+    int i = 0,j = 0,temp = 0;
     while( i < leftLength && j < rightLength){
-        if(cmp(lBase[i], rBase[j]) < 0){
-            base[k] = lBase[i];
+        if(cmp(leftArrayBase[i], rightArrayBase[j]) < 0){
+            base[temp] = leftArrayBase[i];
             i++;
         }
         else{
-            base[k] = rBase[j];
+            base[temp] = rightArrayBase[j];
             j++;
         }
-        k++;
+        temp++;
     }
     while(i < leftLength){
-        base[k] = lBase[i];
-        i++;k++;
+        base[temp] = leftArrayBase[i];
+        i++;temp++;
     }
     while(j < rightLength){
-        base[k] = rBase[i];
-        j++;k++;
+        base[temp] = rightArrayBase[i];
+        j++;temp++;
     }
 }
 
 void mSort(void** base, int numberOfElements , compare comp){
 	int centerIndex = numberOfElements/2;
     int leftLength = centerIndex;
-    int i;
     int rightLength = numberOfElements - centerIndex;
-    void** leftSide = calloc(leftLength, sizeof(void*));
-    void** rightSide = calloc(rightLength, sizeof(void*));
+    int i;
+    void** leftArray = calloc(leftLength, sizeof(void*));
+    void** rightRight = calloc(rightLength, sizeof(void*));
     if(numberOfElements <= 1) return;
     for(i = 0; i < leftLength ;i++){
-        leftSide[i] = base[i];
+        leftArray[i] = base[i];
     }
     for(i = centerIndex; i < numberOfElements ;i++){
-        rightSide[i-centerIndex] = base[i];
+        rightRight[i-centerIndex] = base[i];
     }
-    mSort(leftSide, leftLength, comp);
-    mSort(rightSide, rightLength, comp);
-    mergeAll(base, leftSide, rightSide, leftLength, rightLength, comp);
-    free(leftSide);
-    free(rightSide);
+    mSort(leftArray, leftLength, comp);
+    mSort(rightRight, rightLength, comp);
+    mergeAll(base, leftArray, rightRight, leftLength, rightLength, comp);
+    free(leftArray);
+    free(rightRight);
 }

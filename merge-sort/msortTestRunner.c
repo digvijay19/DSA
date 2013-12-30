@@ -54,6 +54,21 @@ int main(){
 		test_merge_sort_array_of_integers();
 	tearDown();
 	testEnded();
+	testStarted("test_merge_sort_array_of_integers_worst_case");
+	setup();
+		test_merge_sort_array_of_integers_worst_case();
+	tearDown();
+	testEnded();
+	testStarted("test_merge_sort_array_of_Doubles");
+	setup();
+		test_merge_sort_array_of_Doubles();
+	tearDown();
+	testEnded();
+	testStarted("test_merge_sort_array_of_Doubles_worst_case");
+	setup();
+		test_merge_sort_array_of_Doubles_worst_case();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
