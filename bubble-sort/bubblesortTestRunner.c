@@ -59,6 +59,26 @@ int main(){
 		test_bubble_sort_array_of_integers_best_case();
 	tearDown();
 	testEnded();
+	testStarted("test_bubble_sort_array_of_integers_worst_case");
+	setup();
+		test_bubble_sort_array_of_integers_worst_case();
+	tearDown();
+	testEnded();
+	testStarted("test_bubble_sort_array_of_floats");
+	setup();
+		test_bubble_sort_array_of_floats();
+	tearDown();
+	testEnded();
+	testStarted("test_bubble_sort_array_of_floats_best_case");
+	setup();
+		test_bubble_sort_array_of_floats_best_case();
+	tearDown();
+	testEnded();
+	testStarted("test_bubble_sort_array_of_floats_worst_case");
+	setup();
+		test_bubble_sort_array_of_floats_worst_case();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
