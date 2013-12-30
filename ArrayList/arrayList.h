@@ -20,4 +20,6 @@ void* getFromArrayList(ArrayList *list, int index);
 
 int searchInArrayList(ArrayList *list,void* data,compareFunc *comp);
 
+Iterator getIterator(ArrayList *list);
+
 void disposeArraylist(ArrayList *list);
