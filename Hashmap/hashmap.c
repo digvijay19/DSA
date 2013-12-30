@@ -27,12 +27,12 @@ HashElement *createHashElement(void* key,void*value){
 }
 
 HashElement* getElementFromList(sList *list,void* key,compare *comp){
-	HashElement *temp;
+	HashElement *nextElement;
 	Iterator it = getIteratorForList(list);
 	while(it.hasNext(&it)){
-		temp = it.next(&it);
-		if(comp(temp->key , key) == 0)
-			return temp;
+		nextElement = it.next(&it);
+		if(comp(nextElement->key , key) == 0)
+			return nextElement;
 	}
 	return NULL;
 }
@@ -50,10 +50,10 @@ void assignAllSlots(ArrayList *list){
 Hashmap createHashmap(Comparator *comp,HashCodeGenerator *generator){
 	Hashmap map;
 	map.bucket = createArrayList(10);
+	assignAllSlots(&map.bucket);
 	map.comp = comp;
 	map.hashCodeGenerator = generator;
 	map.keys = createList();
-	assignAllSlots(&map.bucket);
 	return map;
 }
 
@@ -64,16 +64,23 @@ sList* getListFromHashMap(Hashmap* hash,void* key){
 	return slotOfElement->list;
 }
 
-int isReHashNeeded(sList *list){
-	return list->length >= 2;
-}
 void rehashIfNeeded(Hashmap* hash,void* key){
 	sList *list;
 	Iterator allKeys;
+	HashElement *hashElement;
+	int currentCapacity = hash->bucket.capacity;
 	list = getListFromHashMap(hash, key);
 	if(list->length < 2) return;
 
 	allKeys = keys(hash);
+	disposeHashmap(hash);
+	hash->bucket = createArrayList(currentCapacity*2);
+	assignAllSlots(&hash->bucket);
+
+	while(allKeys.hasNext(&allKeys)){
+		hashElement = allKeys.next(&allKeys);
+		put(hash, hashElement->key ,hashElement->value);
+	}
 }
 
 int setValue(HashElement *hashElement,void* value){
@@ -91,8 +98,7 @@ int put(Hashmap* hash,void* key,void* value){
 	list = getListFromHashMap(hash, key);
 	hashElement = getElementFromList(list,key,hash->comp);
 	
-	if(hashElement != NULL)
-		return setValue(hashElement,value);
+	if(hashElement != NULL)	return setValue(hashElement,value);
 	
 	hashElement = createHashElement(key,value);
 	return insertInList(list, hashElement,list->length);
