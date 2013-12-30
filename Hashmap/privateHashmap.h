@@ -14,3 +14,5 @@ slot* createSlot();
 HashElement *createHashElement(void* key,void* value);
 
 HashElement* getElementFromList(sList *list,void* key,compare *comp);
+
+int setValue(HashElement *element,void* value);

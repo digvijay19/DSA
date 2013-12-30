@@ -69,9 +69,16 @@ int isReHashNeeded(sList *list){
 }
 void rehashIfNeeded(Hashmap* hash,void* key){
 	sList *list;
+	Iterator allKeys;
 	list = getListFromHashMap(hash, key);
 	if(list->length < 2) return;
 
+	allKeys = keys(hash);
+}
+
+int setValue(HashElement *hashElement,void* value){
+	hashElement->value = value;
+	return 1;
 }
 
 int put(Hashmap* hash,void* key,void* value){
@@ -84,10 +91,9 @@ int put(Hashmap* hash,void* key,void* value){
 	list = getListFromHashMap(hash, key);
 	hashElement = getElementFromList(list,key,hash->comp);
 	
-	if(hashElement != NULL){
-		hashElement->value = value;
-		return 1;
-	}
+	if(hashElement != NULL)
+		return setValue(hashElement,value);
+	
 	hashElement = createHashElement(key,value);
 	return insertInList(list, hashElement,list->length);
 }
