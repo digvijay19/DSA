@@ -139,3 +139,12 @@ void test_keys_gives_iterator_for_hashmap_when_multiple_elements_present(){
 		i++;
 	}
 }
+void test_rehash_when_list_grows_more_than_two(){
+	int values[] = {10,20,30};
+	int key[] = {1,11,21};
+	int i=0;
+	for(i=0;i<3;i++){
+		put(&map,&key[i],&values[i]);
+	}
+	ASSERT(map.bucket.capacity == 20);
+}
