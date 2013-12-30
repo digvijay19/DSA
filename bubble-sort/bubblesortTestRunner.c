@@ -109,6 +109,21 @@ int main(){
 		test_bubble_sort_array_of_String_worst_case();
 	tearDown();
 	testEnded();
+	testStarted("test_bubble_sort_array_of_characters");
+	setup();
+		test_bubble_sort_array_of_characters();
+	tearDown();
+	testEnded();
+	testStarted("test_bubble_sort_array_of_characters_best_case");
+	setup();
+		test_bubble_sort_array_of_characters_best_case();
+	tearDown();
+	testEnded();
+	testStarted("test_bubble_sort_array_of_characters_worst_case");
+	setup();
+		test_bubble_sort_array_of_characters_worst_case();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

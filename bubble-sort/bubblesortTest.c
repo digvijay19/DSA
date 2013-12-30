@@ -16,6 +16,9 @@ int compareDoubles(void* one,void* two){
 int compareStrings(void* one,void* two){
 	return strcmp(one,two);
 }
+int compareChars(void* one,void* two){
+	return *(char*)one - *(char*)two;
+}
 
 void test_bubble_sort_array_of_integers(){
     int actual[] = {2,3,1};
@@ -87,5 +90,23 @@ void test_bubble_sort_array_of_String_worst_case(){
     String actual[] = {"rajKumar","dubeg","aniket"};
     String expected[] = {"aniket","dubeg","rajKumar"};
     bubbleSort(actual, 3, sizeof(String), compareStrings);
+    ASSERT(0 == memcmp(expected, actual, sizeof(expected)));
+}
+void test_bubble_sort_array_of_characters(){
+    char actual[] = {'b','a','c'};
+    char expected[] = {'a','b','c'};
+    bubbleSort(actual, 3, sizeof(char), compareChars);
+    ASSERT(0 == memcmp(expected, actual, sizeof(expected)));
+}
+void test_bubble_sort_array_of_characters_best_case(){
+   	char actual[] = {'a','b','c'};
+    char expected[] = {'a','b','c'};
+    bubbleSort(actual, 3, sizeof(char), compareChars);
+    ASSERT(0 == memcmp(expected, actual, sizeof(expected)));
+}
+void test_bubble_sort_array_of_characters_worst_case(){
+    char actual[] = {'c','b','a'};
+    char expected[] = {'a','b','c'};
+    bubbleSort(actual, 3, sizeof(char), compareChars);
     ASSERT(0 == memcmp(expected, actual, sizeof(expected)));
 }
