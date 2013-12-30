@@ -64,11 +64,23 @@ sList* getListFromHashMap(Hashmap* hash,void* key){
 	return slotOfElement->list;
 }
 
+int isReHashNeeded(sList *list){
+	return list->length >= 2;
+}
+void rehashIfNeeded(Hashmap* hash,void* key){
+	sList *list;
+	list = getListFromHashMap(hash, key);
+	if(list->length < 2) return;
+
+}
+
 int put(Hashmap* hash,void* key,void* value){
 	sList *list;
+	Iterator keysIT;
 	HashElement *hashElement;
 	if(hash == NULL || key == NULL) return 0;
 
+	rehashIfNeeded(hash,key);
 	list = getListFromHashMap(hash, key);
 	hashElement = getElementFromList(list,key,hash->comp);
 	
@@ -101,14 +113,6 @@ int removeFromHashMap(Hashmap *hash,void* key){
 	return removeFromList(list,index);
 }
 
-void* nextKey(Iterator *it){
-	return it->next(it);
-};
-
-int hasNextKey(Iterator *it){
-	return it->hasNext(it);
-};
-
 Iterator keys(Hashmap *hash){
 	Iterator listIT,keysIT,arrayIT;
 	slot *slot;
@@ -133,10 +137,7 @@ void disposeSlot(slot *slot){
 
 void disposeHashmap(Hashmap *hash){
 	Iterator it = getIterator(&hash->bucket);
-	slot *slot;
-	while(it.hasNext(&it)){
-		slot = it.next(&it);
-		disposeSlot(slot);
-	}
+	while(it.hasNext(&it))
+		disposeSlot(it.next(&it));
 	disposeArraylist(&hash->bucket);
 }
