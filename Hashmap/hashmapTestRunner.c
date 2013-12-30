@@ -139,6 +139,11 @@ int main(){
 		test_rehash_when_list_grows_more_than_two();
 	tearDown();
 	testEnded();
+	testStarted("test_rehash_contains_all_previous_hashElements");
+	setup();
+		test_rehash_contains_all_previous_hashElements();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

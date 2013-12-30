@@ -148,3 +148,20 @@ void test_rehash_when_list_grows_more_than_two(){
 	}
 	ASSERT(map.bucket.capacity == 20);
 }
+void test_rehash_contains_all_previous_hashElements(){
+	int values[] = {10,20,30};
+	int key[] = {1,11,21};
+	int i=0;
+	Iterator it;
+	HashElement *temp;
+	for(i=0;i<3;i++){
+		put(&map,&key[i],&values[i]);
+	}
+	it = keys(&map);
+	temp = it.next(&it);
+	ASSERT(temp->key == &key[0]);
+	temp = it.next(&it);
+	ASSERT(temp->key == &key[2]);
+	temp = it.next(&it);
+	ASSERT(temp->key == &key[1]);
+}

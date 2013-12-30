@@ -129,6 +129,8 @@ Iterator keys(Hashmap *hash){
 	Iterator listIT,keysIT,arrayIT;
 	slot *slot;
 	sList *keys = hash->keys;
+	disposeList(keys);
+	keys = createList();
 
 	arrayIT = getIterator(&hash->bucket);
 	while(arrayIT.hasNext(&arrayIT)){
