@@ -1,4 +1,3 @@
-
 typedef struct BSTNode{
 	void* data;
 	struct BSTNode* parent;

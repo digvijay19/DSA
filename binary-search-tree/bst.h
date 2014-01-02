@@ -1,8 +1,8 @@
-typedef int Comapartor(void* first,void* second);
+typedef int Comparator(void* first,void* second);
 
 typedef struct{
 	void* root;
-	Comapartor *comp;
+	Comparator *comp;
 } BST;
 
 typedef struct{
@@ -10,7 +10,7 @@ typedef struct{
 	void* right;
 } Children;
 
-BST createBST(Comapartor *comp);
+BST createBST(Comparator *comp);
 
 int insertInBST(BST* tree,void* data);
 

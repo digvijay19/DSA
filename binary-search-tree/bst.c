@@ -13,14 +13,14 @@ BSTNode* createBSTNode(void* data){
 
 // ==============================================================================
 
-BST createBST(Comapartor *comp){
+BST createBST(Comparator *comp){
 	BST tree;
 	tree.comp = comp;
 	tree.root = NULL;
 	return tree;
 }
 
-BSTNode* getNodeToInsert(BSTNode *root,Comapartor *comp,void* data){
+BSTNode* getNodeToInsert(BSTNode *root,Comparator *comp,void* data){
 	int compareResult = comp(root->data,data);
 	if(compareResult == 0)	return NULL;
 	if(compareResult > 0){
@@ -49,27 +49,33 @@ int insertInBST(BST* tree,void* data){
 		nodeToInsert->right = newNode;
 	return 1;
 }
-
-int searchInAllNodes(BSTNode* root,Comapartor *comp,void* data){
-	int compareResult;
-	if(root == NULL) return 0;
-	compareResult = comp(root->data,data);
-	if( compareResult == 0) return 1;
-	if(compareResult > 0)
-		return searchInAllNodes(root->left,comp,data);
-	return searchInAllNodes(root->right,comp,data);
-}
-
-int searchInBST(BST* tree,void* data){
-	BSTNode* node = tree->root;
-	return searchInAllNodes(node,tree->comp,data);
-}
-
-BSTNode* getRootNode(BSTNode* root,Comapartor *comp,void* data){
+BSTNode* getNodeFromBST(BSTNode* root,Comparator *comp,void* data){
 	int compareResult;
 	if(root == NULL) return NULL;
 	compareResult = comp(root->data,data);
 	if( compareResult == 0) return root;
+	if(compareResult > 0)
+		return getNodeFromBST(root->left,comp,data);
+	return getNodeFromBST(root->right,comp,data);
+}
+
+BSTNode* getNode(BST *tree ,void* data){
+	BSTNode *root,*node;
+	return getNodeFromBST(tree->root,tree->comp,data);
+}
+
+int searchInBST(BST* tree,void* data){
+	BSTNode* node;
+	node = getNode(tree,data);
+	if(node == NULL) return 0;
+	return 1;
+}
+
+BSTNode* getRootNode(BSTNode* root,Comparator *comp,void* data){
+	int compareResult;
+	if(root == NULL) return NULL;
+	compareResult = comp(root->data,data);
+	if(compareResult == 0) return root;
 	if(compareResult > 0)
 		return getRootNode(root->left,comp,data);
 	return getRootNode(root->right,comp,data);
@@ -84,3 +90,4 @@ Children getChildren(BST* tree,void* parentData){
 		children.right = node->right->data;
 	return children;
 }
+
