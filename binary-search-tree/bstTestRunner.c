@@ -54,6 +54,11 @@ int main(){
 		test_insert_root_node_in_BST();
 	tearDown();
 	testEnded();
+	testStarted("test_insert_left_Of_root");
+	setup();
+		test_insert_left_Of_root();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

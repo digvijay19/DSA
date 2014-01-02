@@ -7,6 +7,6 @@ typedef struct{
 
 BST createBST(Comapartor *comp);
 
-int insert(BST* tree,void* data);
+int insertInBST(BST* tree,void* data);
 
-int search(BST* tree,void* data);
+int searchInBST(BST* tree,void* data);

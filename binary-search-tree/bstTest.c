@@ -18,7 +18,18 @@ void setup(){
 void test_insert_root_node_in_BST(){
 	int element = 10;
 	BSTNode *root;
-	ASSERT(insert(&bst, &element) == SUCCESS);
+	ASSERT(insertInBST(&bst, &element) == SUCCESS);
 	root = bst.root;
 	ASSERT(root->data = &element);
+}
+
+void test_insert_left_Of_root(){
+	int rootData = 3;
+	int leftData = 2;
+	BSTNode *root;
+	ASSERT(insertInBST(&bst, &rootData) == SUCCESS);
+	ASSERT(insertInBST(&bst, &leftData) == SUCCESS);
+	root = bst.root;
+	ASSERT(root->data = &rootData);
+	ASSERT(root->left->data == &leftData);
 }
