@@ -119,6 +119,21 @@ int main(){
 		test_deletes_right_leaf_node();
 	tearDown();
 	testEnded();
+	testStarted("test_remove_one_node_of_two_leaf_nodes");
+	setup();
+		test_remove_one_node_of_two_leaf_nodes();
+	tearDown();
+	testEnded();
+	testStarted("test_removes_node_when_children_are_present");
+	setup();
+		test_removes_node_when_children_are_present();
+	tearDown();
+	testEnded();
+	testStarted("test_removes_node_when_children_are_presentnsmxk");
+	setup();
+		test_removes_node_when_children_are_presentnsmxk();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

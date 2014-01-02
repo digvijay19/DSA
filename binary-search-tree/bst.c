@@ -56,10 +56,9 @@ int insertNewNode(BSTNode *root,Comparator *comp,void* data){
 			return insertAtLeft(root,data);
 		return insertNewNode(root->left,comp,data);
 	}
-
 	if(root->right == NULL)
 		return insertAtRight(root,data);
-	return insertNewNode(root->right, comp, data); 
+	return insertNewNode(root->right, comp, data); 	
 }
 
 int insertInBST(BST* tree,void* data){
@@ -90,7 +89,7 @@ Children getChildren(BST* tree,void* parentData){
 }
 
 int removeFromBST(BST* tree,void* data){
-	BSTNode *nodeToDelete,*parentNode;
+	BSTNode *nodeToDelete,*parentNode,*temp;
 	nodeToDelete = getNode(tree,data);
 
 	if(nodeToDelete == NULL)	return 0;
@@ -98,8 +97,14 @@ int removeFromBST(BST* tree,void* data){
 	parentNode = nodeToDelete->parent;
 	if(parentNode->left != NULL && tree->comp(parentNode->left->data,data) == 0){
 		parentNode->left = nodeToDelete->left;
+		temp = parentNode->left;
+		if(temp != NULL)
+			temp->right = nodeToDelete->right;
+		free(nodeToDelete);
+		return 1;
 	}
 	parentNode->right = nodeToDelete->left;
+
 	free(nodeToDelete);
 	return 1;
 }

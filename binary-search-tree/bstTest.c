@@ -144,3 +144,43 @@ void test_deletes_right_leaf_node(){
 	ASSERT(removeFromBST(&bst,&rightData) == SUCCESS);
 	ASSERT(root->right == NULL);
 }
+
+void test_remove_one_node_of_two_leaf_nodes(){
+	int rootData = 2;
+	int leftData = 1;
+	int rightData = 3;
+	BSTNode *root;
+	insertInBST(&bst, &rootData);
+	insertInBST(&bst, &leftData);
+	insertInBST(&bst, &rightData);
+	root = bst.root;
+	ASSERT(removeFromBST(&bst,&rightData) == SUCCESS);
+	ASSERT(root->right == NULL);
+}
+
+void test_removes_node_when_children_are_present(){
+	int rootData = 3;
+	int rootChild = 2;
+	int levelTwoChild = 1;
+	BSTNode *root;
+	insertInBST(&bst, &rootData);
+	insertInBST(&bst, &rootChild);
+	insertInBST(&bst, &levelTwoChild);
+	root = bst.root;
+	ASSERT(removeFromBST(&bst,&rootChild) == SUCCESS);
+	ASSERT(root->left->data == &levelTwoChild);
+}
+void test_removes_node_when_children_are_presentnsmxk(){
+	int rootData = 4;
+	int rootChild = 2;
+	int levelTwoChildren[] = {1,3};
+	BSTNode *root;
+	insertInBST(&bst, &rootData);
+	insertInBST(&bst, &rootChild);
+	insertInBST(&bst, &levelTwoChildren[0]);
+	insertInBST(&bst, &levelTwoChildren[1]);
+	root = bst.root;
+	ASSERT(removeFromBST(&bst,&rootChild) == SUCCESS);
+	ASSERT(root->left->data == &levelTwoChildren[0]);
+	ASSERT(root->left->right->data == &levelTwoChildren[1]);
+}
