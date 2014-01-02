@@ -99,6 +99,16 @@ int main(){
 		test_do_not_insert_duplicate_data();
 	tearDown();
 	testEnded();
+	testStarted("test_get_children_of_root");
+	setup();
+		test_get_children_of_root();
+	tearDown();
+	testEnded();
+	testStarted("test_get_children_of_root_when_children_not_present");
+	setup();
+		test_get_children_of_root_when_children_not_present();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

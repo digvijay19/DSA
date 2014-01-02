@@ -1,6 +1,7 @@
 #include "testUtils.h"
 #include "bst.h"
 #include "privateBST.h"
+#include <stdlib.h>
 
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 
@@ -99,4 +100,26 @@ void test_do_not_insert_duplicate_data(){
 	int rootData = 3;
 	ASSERT(insertInBST(&bst, &rootData) == SUCCESS);
 	ASSERT(insertInBST(&bst, &rootData) == FAIL);
+}
+
+void test_get_children_of_root(){
+	int rootData = 3;
+	int left = 2;
+	int right = 4;
+	Children children;
+	insertInBST(&bst, &rootData);
+	insertInBST(&bst, &left);
+	insertInBST(&bst, &right);
+	children = getChildren(&bst,&rootData);
+	ASSERT(children.left == &left);
+	ASSERT(children.right == &right);
+}
+
+void test_get_children_of_root_when_children_not_present(){
+	int rootData = 3;
+	Children children;
+	insertInBST(&bst, &rootData);
+	children = getChildren(&bst,&rootData);
+	ASSERT(children.left == NULL);
+	ASSERT(children.right == NULL);
 }

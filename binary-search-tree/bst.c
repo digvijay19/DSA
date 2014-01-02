@@ -41,11 +41,12 @@ int insertInBST(BST* tree,void* data){
 	nodeToInsert = getNodeToInsert(tree->root,tree->comp,data);
 	
 	if(nodeToInsert == NULL)	return 0;
+
+	newNode->parent = nodeToInsert;
 	if(tree->comp(nodeToInsert->data,data) > 0)
 		nodeToInsert->left = newNode;
 	else
 		nodeToInsert->right = newNode;
-	
 	return 1;
 }
 
@@ -58,7 +59,28 @@ int searchInAllNodes(BSTNode* root,Comapartor *comp,void* data){
 		return searchInAllNodes(root->left,comp,data);
 	return searchInAllNodes(root->right,comp,data);
 }
+
 int searchInBST(BST* tree,void* data){
 	BSTNode* node = tree->root;
 	return searchInAllNodes(node,tree->comp,data);
+}
+
+BSTNode* getRootNode(BSTNode* root,Comapartor *comp,void* data){
+	int compareResult;
+	if(root == NULL) return NULL;
+	compareResult = comp(root->data,data);
+	if( compareResult == 0) return root;
+	if(compareResult > 0)
+		return getRootNode(root->left,comp,data);
+	return getRootNode(root->right,comp,data);
+}
+
+Children getChildren(BST* tree,void* parentData){
+	Children children = {NULL,NULL};
+	BSTNode* node = getRootNode(tree->root, tree->comp, parentData);
+	if(node->left != NULL)
+		children.left = node->left->data;
+	if(node->right != NULL)
+		children.right = node->right->data;
+	return children;
 }
