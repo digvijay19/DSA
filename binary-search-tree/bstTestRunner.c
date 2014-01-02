@@ -59,6 +59,21 @@ int main(){
 		test_insert_left_Of_root();
 	tearDown();
 	testEnded();
+	testStarted("test_insert_right_Of_root");
+	setup();
+		test_insert_right_Of_root();
+	tearDown();
+	testEnded();
+	testStarted("test_insert_left_and_right_to_root");
+	setup();
+		test_insert_left_and_right_to_root();
+	tearDown();
+	testEnded();
+	testStarted("test_insert_left_at_level_2");
+	setup();
+		test_insert_left_at_level_2();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

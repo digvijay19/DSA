@@ -40,7 +40,8 @@ int insertInBST(BST* tree,void* data){
 	
 	if(tree->comp(nodeToInsert->data,data) > 0)
 		nodeToInsert->left = newNode;
-	nodeToInsert->right = newNode;
+	else
+		nodeToInsert->right = newNode;
 	
 	return 1;
 }
