@@ -89,6 +89,11 @@ int main(){
 		test_search_data_in_right_node();
 	tearDown();
 	testEnded();
+	testStarted("test_search_data_when_data_is_not_present");
+	setup();
+		test_search_data_when_data_is_not_present();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

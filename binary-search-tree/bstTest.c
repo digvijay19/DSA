@@ -5,6 +5,8 @@
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 
 const int SUCCESS = 1;
+const int FAIL = 0;
+
 int compareInts(void* first,void* second){
 	return *(int*)first - *(int*)second;
 }
@@ -86,4 +88,10 @@ void test_search_data_in_right_node(){
 	insertInBST(&bst, &rootData);
 	insertInBST(&bst, &rightData);
 	ASSERT(searchInBST(&bst,&rightData) == SUCCESS);
+}
+void test_search_data_when_data_is_not_present(){
+	int rootData = 3;
+	int dataTosearch = 4;
+	insertInBST(&bst, &rootData);
+	ASSERT(searchInBST(&bst,&dataTosearch) == FAIL);
 }
