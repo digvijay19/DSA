@@ -10,6 +10,20 @@ BSTNode* createBSTNode(void* data){
 	return newNode;
 }
 
+BSTNode* getNodeFromBST(BSTNode* root,Comparator *comp,void* data){
+	int compareResult;
+	if(root == NULL) return NULL;
+	compareResult = comp(root->data,data);
+	if(compareResult == 0) return root;
+	if(compareResult > 0)
+		return getNodeFromBST(root->left,comp,data);
+	return getNodeFromBST(root->right,comp,data);
+}
+
+BSTNode* getNode(BST *tree ,void* data){
+	return getNodeFromBST(tree->root,tree->comp,data);
+}
+
 // ==============================================================================
 
 BST createBST(Comparator *comp){
@@ -22,11 +36,13 @@ BST createBST(Comparator *comp){
 int insertAtLeft(BSTNode *root,void* data){
 	BSTNode *newNode = createBSTNode(data);
 	root->left = newNode;
+	newNode->parent = root;
 	return 1;
 }
 int insertAtRight(BSTNode *root,void* data){
 	BSTNode *newNode = createBSTNode(data);
 	root->right = newNode;
+	newNode->parent = root;
 	return 1;
 }
 
@@ -55,19 +71,6 @@ int insertInBST(BST* tree,void* data){
 	}
 	return insertNewNode(tree->root,tree->comp,data);
 }
-BSTNode* getNodeFromBST(BSTNode* root,Comparator *comp,void* data){
-	int compareResult;
-	if(root == NULL) return NULL;
-	compareResult = comp(root->data,data);
-	if(compareResult == 0) return root;
-	if(compareResult > 0)
-		return getNodeFromBST(root->left,comp,data);
-	return getNodeFromBST(root->right,comp,data);
-}
-
-BSTNode* getNode(BST *tree ,void* data){
-	return getNodeFromBST(tree->root,tree->comp,data);
-}
 
 int searchInBST(BST* tree,void* data){
 	BSTNode* node;
@@ -86,3 +89,17 @@ Children getChildren(BST* tree,void* parentData){
 	return children;
 }
 
+int removeFromBST(BST* tree,void* data){
+	BSTNode *nodeToDelete,*parentNode;
+	nodeToDelete = getNode(tree,data);
+
+	if(nodeToDelete == NULL)	return 0;
+	
+	parentNode = nodeToDelete->parent;
+	if(parentNode->left != NULL && tree->comp(parentNode->left->data,data) == 0){
+		parentNode->left = nodeToDelete->left;
+	}
+	parentNode->right = nodeToDelete->left;
+	free(nodeToDelete);
+	return 1;
+}

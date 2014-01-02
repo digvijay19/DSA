@@ -109,6 +109,16 @@ int main(){
 		test_get_children_of_root_when_children_not_present();
 	tearDown();
 	testEnded();
+	testStarted("test_deletes_left_leaf_node");
+	setup();
+		test_deletes_left_leaf_node();
+	tearDown();
+	testEnded();
+	testStarted("test_deletes_right_leaf_node");
+	setup();
+		test_deletes_right_leaf_node();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

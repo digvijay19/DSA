@@ -122,3 +122,25 @@ void test_get_children_of_root_when_children_not_present(){
 	ASSERT(children.left == NULL);
 	ASSERT(children.right == NULL);
 }
+
+void test_deletes_left_leaf_node(){
+	int rootData = 3;
+	int leftData = 2;
+	BSTNode *root;
+	insertInBST(&bst, &rootData);
+	insertInBST(&bst, &leftData);
+	root = bst.root;
+	ASSERT(removeFromBST(&bst,&leftData) == SUCCESS);
+	ASSERT(root->left == NULL);	
+}
+
+void test_deletes_right_leaf_node(){
+	int rootData = 3;
+	int rightData = 4;
+	BSTNode *root;
+	insertInBST(&bst, &rootData);
+	insertInBST(&bst, &rightData);
+	root = bst.root;
+	ASSERT(removeFromBST(&bst,&rightData) == SUCCESS);
+	ASSERT(root->right == NULL);
+}
