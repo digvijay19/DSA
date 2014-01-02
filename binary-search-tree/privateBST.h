@@ -1,3 +1,5 @@
+#include "bst.h"
+
 typedef struct BSTNode{
 	void* data;
 	struct BSTNode* parent;
@@ -6,3 +8,4 @@ typedef struct BSTNode{
 } BSTNode;
 
 BSTNode* createBSTNode(void* data);
+BSTNode* getNode(BST *tree,void* data);

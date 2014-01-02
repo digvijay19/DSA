@@ -1,5 +1,4 @@
 #include "testUtils.h"
-#include "bst.h"
 #include "privateBST.h"
 #include <stdlib.h>
 
