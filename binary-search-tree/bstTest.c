@@ -67,3 +67,23 @@ void test_insert_left_at_level_2(){
 	ASSERT(root->left->data == &leftLevelOne);
 	ASSERT(root->left->left->data == &leftLeveltwo);
 }
+
+void test_search_data_in_root_node(){
+	int rootData = 3;
+	insertInBST(&bst, &rootData);
+	ASSERT(searchInBST(&bst,&rootData) == SUCCESS);
+}
+void test_search_data_in_left_node(){
+	int rootData = 3;
+	int leftData = 2;
+	insertInBST(&bst, &rootData);
+	insertInBST(&bst, &leftData);
+	ASSERT(searchInBST(&bst,&leftData) == SUCCESS);
+}
+void test_search_data_in_right_node(){
+	int rootData = 3;
+	int rightData = 4;
+	insertInBST(&bst, &rootData);
+	insertInBST(&bst, &rightData);
+	ASSERT(searchInBST(&bst,&rightData) == SUCCESS);
+}

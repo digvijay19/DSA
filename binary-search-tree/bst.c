@@ -45,3 +45,17 @@ int insertInBST(BST* tree,void* data){
 	
 	return 1;
 }
+
+int searchInAllNodes(BSTNode* root,Comapartor *comp,void* data){
+	int compareResult;
+	if(root == NULL) return 0;
+	compareResult = comp(root->data,data);
+	if( compareResult == 0) return 1;
+	if(compareResult > 0)
+		return searchInAllNodes(root->left,comp,data);
+	return searchInAllNodes(root->right,comp,data);
+}
+int searchInBST(BST* tree,void* data){
+	BSTNode* node = tree->root;
+	return searchInAllNodes(node,tree->comp,data);
+}

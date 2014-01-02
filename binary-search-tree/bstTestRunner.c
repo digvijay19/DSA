@@ -74,6 +74,21 @@ int main(){
 		test_insert_left_at_level_2();
 	tearDown();
 	testEnded();
+	testStarted("test_search_data_in_root_node");
+	setup();
+		test_search_data_in_root_node();
+	tearDown();
+	testEnded();
+	testStarted("test_search_data_in_left_node");
+	setup();
+		test_search_data_in_left_node();
+	tearDown();
+	testEnded();
+	testStarted("test_search_data_in_right_node");
+	setup();
+		test_search_data_in_right_node();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
