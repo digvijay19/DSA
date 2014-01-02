@@ -21,7 +21,9 @@ BST createBST(Comapartor *comp){
 }
 
 BSTNode* getNodeToInsert(BSTNode *root,Comapartor *comp,void* data){
-	if(comp(root->data,data) > 0){
+	int compareResult = comp(root->data,data);
+	if(compareResult == 0)	return NULL;
+	if(compareResult > 0){
 		if(root->left == NULL) return root;
 		return getNodeToInsert(root->left,comp,data);
 	}
@@ -38,6 +40,7 @@ int insertInBST(BST* tree,void* data){
 	}
 	nodeToInsert = getNodeToInsert(tree->root,tree->comp,data);
 	
+	if(nodeToInsert == NULL)	return 0;
 	if(tree->comp(nodeToInsert->data,data) > 0)
 		nodeToInsert->left = newNode;
 	else

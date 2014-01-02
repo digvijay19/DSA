@@ -95,3 +95,8 @@ void test_search_data_when_data_is_not_present(){
 	insertInBST(&bst, &rootData);
 	ASSERT(searchInBST(&bst,&dataTosearch) == FAIL);
 }
+void test_do_not_insert_duplicate_data(){
+	int rootData = 3;
+	ASSERT(insertInBST(&bst, &rootData) == SUCCESS);
+	ASSERT(insertInBST(&bst, &rootData) == FAIL);
+}

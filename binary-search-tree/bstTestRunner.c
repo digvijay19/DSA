@@ -94,6 +94,11 @@ int main(){
 		test_search_data_when_data_is_not_present();
 	tearDown();
 	testEnded();
+	testStarted("test_do_not_insert_duplicate_data");
+	setup();
+		test_do_not_insert_duplicate_data();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
